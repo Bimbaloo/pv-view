@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin="anonymous"
+    integrity="sha512-cO/G0T0drTsOW6uuK119iEWlPqYRxK1bNYWK80HmJbfiEwwc3L6a8p7Oj0EUWxz7wcCq4tgGwLxqCif0Y7kKMg=="
+    src="https://lib.baomitu.com/echarts/5.1.0/echarts.common.js"></script>
+  <link href="https://cdn.bootcss.com/element-ui/2.1.0/theme-chalk/index.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+  <script src="https://cdn.bootcss.com/element-ui/2.1.0/index.js"></script>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="base.css">
+  <title>车间看板</title>
+</head>
+
+<body id="app">
+  <!-- 抬头 -->
+  <div class="title-box">
+    <div class="title">三课一车间生产看板</div>
+    <div class="message" style="display: flex;">
+      <div class="time">2021年2月26日09:29:23星期五</div>
+      <div class="name">MES</div>
+    </div>
+
+  </div>
+  <!-- 生产 -->
+  <div class="Production">
+    <div class="ready">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>产前准备</span>
+      </div>
+    </div>
+    <!-- 出勤 -->
+    <div class="chuqing">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>定额人员出勤</span>
+      </div>
+      <div class="table-message">
+        <el-table ref="table" :data="tableData.data" style="width: 100%">
+          <el-table-column v-for="col in columns" :key="col.prop" :label="col.label" :prop="col.prop"
+            :class-name="col.class" align='center'>
+          </el-table-column>
+        </el-table>
+      </div>
+
+    </div>
+    <!-- 非定额出勤 -->
+    <div class="feichuqing">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>非定额人员出勤</span>
+      </div>
+    </div>
+  </div>
+  <!-- 异常 -->
+  <div class="abnormal">
+
+  </div>
+  <!-- 进度 -->
+  <div class="progress"></div>
+
+
+  <script>
+    var Main = new Vue({
+      el: '#app',
+      name: app,
+      data: {
+        tableData: {
+          columns: [{
+              label: '打印机',
+              prop: 'printer',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '任务数',
+              prop: 'tasksNum',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '状态',
+              prop: 'status',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '最近一次打印时间',
+              prop: 'lastTime',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '关联设备',
+              prop: 'equipment',
+              align: 'center',
+              class: 'red',
+              showHead: true
+            },
+            {
+              label: '操作',
+              prop: 'handle',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '任务名称:',
+              prop: 'name',
+              align: 'center',
+              showHead: false
+            },
+            {
+              label: '发起人:',
+              prop: 'people',
+              align: 'center',
+              showHead: false
+            },
+            {
+              label: '发起时间:',
+              prop: 'happenTime',
+              align: 'center',
+              showHead: false
+            },
+            {
+              label: '页数:',
+              prop: 'size',
+              align: 'center',
+              showHead: false
+            }
+          ],
+          data: [{
+              tasksNum: '1',
+              printer: 'AA',
+              status: '启动',
+              lastTime: '2018/3/29 11:20',
+              equipment: 4,
+              handle: '暂停',
+              rowNums: [{
+                name: '招聘信息',
+                people: '张三',
+                happenTime: '2018/1/2',
+                size: 10
+              }]
+            },
+            {
+              tasksNum: '2',
+              printer: 'BB',
+              status: '暂停',
+              lastTime: '2018/3/28 10:55',
+              equipment: 5,
+              handle: '启动',
+              rowNums: [{
+                  name: '打印信息',
+                  people: '李四',
+                  happenTime: '2018/1/2',
+                  size: 10
+                },
+                {
+                  name: '打印信息',
+                  people: '李四',
+                  happenTime: '2018/1/2',
+                  size: 10
+                }
+              ]
+            },
+            {
+              tasksNum: '3',
+              printer: 'CC',
+              status: '--',
+              lastTime: '2018/3/29 01:10',
+              equipment: 1,
+              handle: '启动',
+              rowNums: [{
+                  name: '打印信息1',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                },
+                {
+                  name: '打印信息',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                },
+                {
+                  name: '打印信息',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                }
+              ]
+            },
+            {
+              tasksNum: '4',
+              printer: 'DD',
+              status: '--',
+              lastTime: '2018/3/29 06:58',
+              equipment: 4,
+              handle: '启动',
+              rowNums: [{
+                  name: '打印信息1',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                },
+                {
+                  name: '打印信息',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                },
+                {
+                  name: '打印信息',
+                  people: '赵钱',
+                  happenTime: '2018/1/2',
+                  size: 10
+                }
+              ]
+            }
+          ],
+          height: 100
+        }
+      },
+      computed: {
+        columns() {
+          return this.tableData.columns.filter((item) => {
+            return item.showHead
+          })
+        },
+        items() {
+          return this.tableData.columns.filter((item) => {
+            return !item.showHead
+          })
+        }
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+{
+    "errorCode": 0,
+    "errorMsg": "",
+    "data": [{
+        "Achievement": "50%",
+        "material": "20%",
+        "UPH": "30%"
+    }, {
+        "Achievement": "30%",
+        "material": "40%",
+        "UPH": "30%"
+    }, {
+        "Achievement": "20%",
+        "material": "10%",
+        "UPH": "70"
+    }, {
+        "Achievement": "63%",
+        "material": "17%",
+        "UPH": "20%"
+    }, {
+        "Achievement": "53%",
+        "material": "17%",
+        "UPH": "30%"
+    }, {
+        "Achievement": "43%",
+        "material": "27%",
+        "UPH": "30%"
+    }, {
+        "Achievement": "13%",
+        "material": "37%",
+        "UPH": "50%"
+    }]
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin="anonymous"
+    integrity="sha512-cO/G0T0drTsOW6uuK119iEWlPqYRxK1bNYWK80HmJbfiEwwc3L6a8p7Oj0EUWxz7wcCq4tgGwLxqCif0Y7kKMg=="
+    src="https://lib.baomitu.com/echarts/5.1.0/echarts.common.js"></script>
+  <link rel="stylesheet" href="reset.css">
+  <title>车间看板</title>
+
+  <style>
+    body {
+      background-color: hsl(236deg 100% 16%);
+    }
+
+    .title-box {
+      height: 200px;
+      background-image: linear-gradient(to right, #020828, #12204d, #020828);
+
+    }
+
+    .title,
+    .time,
+    .name {
+      color: #fff;
+    }
+
+    .title {
+      font-size: 80px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .time {
+      font-size: 50px;
+    }
+
+    .name {
+      font-size: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 抬头 -->
+  <div class="title-box">
+    <div class="title">三课一车间生产看板</div>
+    <div>
+      <div class="time">2021年2月26日09:29:23星期五</div>
+      <div class="name">MES</div>
+    </div>
+
+  </div>
+  <!-- 生产 -->
+  <div class="Production">
+
+  </div>
+  <!-- 异常 -->
+  <div class="abnormal">
+
+  </div>
+  <!-- 进度 -->
+  <div class="progress"></div>
+</body>
+
+</html>

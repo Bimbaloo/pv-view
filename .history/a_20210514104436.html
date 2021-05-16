@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin="anonymous"
+    integrity="sha512-cO/G0T0drTsOW6uuK119iEWlPqYRxK1bNYWK80HmJbfiEwwc3L6a8p7Oj0EUWxz7wcCq4tgGwLxqCif0Y7kKMg=="
+    src="https://lib.baomitu.com/echarts/5.1.0/echarts.common.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.1/index.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.1/theme-chalk/index.css" rel="stylesheet">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="base.css">
+  <title>车间看板</title>
+</head>
+
+<body id="app">
+  <!-- 抬头 -->
+  <div class="title-box">
+    <div class="title">三课一车间生产看板</div>
+    <div class="message" style="display: flex;">
+      <div class="time">2021年2月26日09:29:23星期五</div>
+      <div class="name">MES</div>
+    </div>
+
+  </div>
+  <!-- 生产 -->
+  <div class="Production">
+    <div class="ready">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>产前准备</span>
+      </div>
+    </div>
+    <!-- 出勤 -->
+    <div class="chuqing">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>定额人员出勤</span>
+      </div>
+      <div class="table-message">
+        <el-table ref="table" :data="tableData.data" fit style="width: 100%" @cell-click="cellClick">
+          <el-table-column v-for="col in columns" :key="col.prop" :label="col.label" :prop="col.prop"
+            :class-name="col.class" align='center'>
+          </el-table-column>
+        </el-table>
+      </div>
+
+    </div>
+    <!-- 非定额出勤 -->
+    <div class="feichuqing">
+      <div class="designation">
+        <i class="el-icon-s-grid"></i>
+        <span>非定额人员出勤</span>
+      </div>
+    </div>
+  </div>
+  <!-- 异常 -->
+  <div class="abnormal">
+
+  </div>
+  <!-- 进度 -->
+  <div class="progress"></div>
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin="anonymous"
+    integrity="sha512-cO/G0T0drTsOW6uuK119iEWlPqYRxK1bNYWK80HmJbfiEwwc3L6a8p7Oj0EUWxz7wcCq4tgGwLxqCif0Y7kKMg=="
+    src="https://lib.baomitu.com/echarts/5.1.0/echarts.common.js"></script>
+  <link href="https://cdn.bootcss.com/element-ui/2.1.0/theme-chalk/index.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/vue/2.5.13/vue.js"></script>
+  <script src="https://cdn.bootcss.com/element-ui/2.1.0/index.js"></script>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="base.css">
+  <title>车间看板</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 抬头 -->
+    <div class="title-box">
+      <div class="title">三课一车间生产看板</div>
+      <div class="message" style="display: flex;">
+        <div class="time">2021年2月26日09:29:23星期五</div>
+        <div class="name">MES</div>
+      </div>
+
+    </div>
+    <!-- 生产 -->
+    <div class="Production">
+      <div class="ready">
+        <div class="designation">
+          <i class="el-icon-menu"></i>
+          <span>产前准备</span>
+        </div>
+      </div>
+      <!-- 出勤 -->
+      <div class="chuqing">
+        <div class="designation">
+          <i class="el-icon-menu"></i>
+          <span>定额人员出勤</span>
+        </div>
+        <div class="table-message">
+          <el-table ref="table" :data="tableData.data" style="width: 100%;margin-top: 20px;">
+            <el-table-column v-for="col in columns" :key="col.prop" :label="col.label" :prop="col.prop"
+              :class-name="col.class" align='center'>
+            </el-table-column>
+          </el-table>
+        </div>
+
+      </div>
+      <!-- 非定额出勤 -->
+      <div class="feichuqing">
+        <div class="designation">
+          <i class="el-icon-menu"></i>
+          <span>非定额人员出勤</span>
+        </div>
+        <div class="table-message" style="display: flex;">
+          <el-table ref="table2" :data="tableData.data2" style="width: 45%;margin-top: 20px;">
+            <el-table-column v-for="col in columns2" :key="col.prop" :label="col.label" :prop="col.prop"
+              :class-name="col.class" align='center'>
+            </el-table-column>
+          </el-table>
+          <el-table ref="table2" :data="tableData.data2" style="width: 45%;margin-top: 20px;">
+            <el-table-column v-for="col in columns2" :key="col.prop" :label="col.label" :prop="col.prop"
+              :class-name="col.class" align='center'>
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
+    </div>
+    <!-- 异常 -->
+    <div class="abnormal">
+      <div class="designation">
+        <i class="el-icon-menu"></i>
+        <span>异常情况</span>
+      </div>
+      <div class="table-message">
+        <el-table ref="table2" :data="tableData.data4" style="width: 45%;margin-top: 20px;">
+          <el-table-column v-for="col in columns4" :key="col.prop" :label="col.label" :prop="col.prop"
+            :class-name="col.class" align='center'>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
+    <!-- 进度 -->
+    <div class="progress"></div>
+
+  </div>
+  <script>
+    var Main = new Vue({
+      el: '#app',
+      name: app,
+      data: {
+        tableData: {
+          columns: [{
+              label: '在职人员',
+              prop: 'printer',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '应出勤',
+              prop: 'tasksNum',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '实际出勤',
+              prop: 'status',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '超出勤',
+              prop: 'lastTime',
+              align: 'center',
+              showHead: true
+            },
+            {
+              label: '出勤率',
+              prop: 'equipment',
+              align: 'center',
+              class: 'red',
+              showHead: true
+            }
+          ],
+          data: [{
+            tasksNum: '1',
+            printer: '0',
+            status: '0',
+            lastTime: '0',
+            equipment: 0
+          }],
+          columns2: [{
+            label: '序列',
+            prop: 'order',
+            align: 'center',
+          }, {
+            label: '在职人数',
+            prop: 'num',
+            align: 'center',
+          }, {
+            label: '实际出勤',
+            prop: 'realistic',
+            align: 'center',
+          }],
+          data2: [{
+            order: '设备',
+            num: '1',
+            realistic: '0'
+          }, {
+            order: '工艺',
+            num: '5',
+            realistic: '0'
+          }, ],
+          data3: [{
+              order: '品质',
+              num: '0',
+              realistic: '0'
+            },
+            {
+              order: '制造',
+              num: '6',
+              realistic: '0'
+            }
+          ],
+          columns4: [{
+            label: '治具总数',
+            prop: 'order',
+            align: 'center',
+          }, {
+            label: '机台总数',
+            prop: 'num',
+            align: 'center',
+          }, {
+            label: '运行',
+            prop: 'run',
+            align: 'center',
+          }, {
+            label: '待机',
+            prop: 'Standby',
+            align: 'center',
+          }, {
+            label: '报警',
+            prop: 'alarm',
+            align: 'center',
+          }, {
+            label: '离线',
+            prop: 'offline',
+            align: 'center',
+          }],
+          data3: [{
+              order: '品质',
+              num: '0',
+              realistic: '0'
+            },
+            {
+              order: '制造',
+              num: '6',
+              realistic: '0'
+            }
+          ],
+          height: 100
+        }
+      },
+      computed: {
+        columns() {
+          return this.tableData.columns.filter((item) => {
+            return item.showHead
+          })
+        },
+        columns2() {
+          return this.tableData.columns2
+        },
+        items() {
+          return this.tableData.columns.filter((item) => {
+            return !item.showHead
+          })
+        }
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
