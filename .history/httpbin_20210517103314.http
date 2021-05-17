@@ -1,0 +1,9 @@
+### 发送JSON数据
+
+POST http://127.0.0.1:9201/mes/cjkb/execute
+Content-Type: application/json
+//这里必须有一空行
+
+{
+  "query": {"a":1,"b":2}
+}

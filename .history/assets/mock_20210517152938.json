@@ -1,0 +1,105 @@
+{
+  "cqzb": [{
+    "qjd": 1.0000,
+    "wlqtl": 0.6924,
+    "sbdjs": 0
+  }],
+  "fderycq2": [{
+    "sjcq": "0",
+    "xl": "制造",
+    "zzrs": 100
+  }, {
+    "sjcq": "0",
+    "xl": "品保",
+    "zzrs": 100
+  }],
+  "fderycq1": [{
+    "sjcq": "0",
+    "xl": "工艺",
+    "zzrs": 100
+  }, {
+    "sjcq": "0",
+    "xl": "设备",
+    "zzrs": 100
+  }],
+  "derycq": [{
+    "sjcq": 1,
+    "ccq": 3,
+    "ycq": 5,
+    "zzrs": 0,
+    "cql": 0
+  }],
+  "scjd": [{
+    "jhdcl": 0,
+    "wlqtl": 0,
+    "lv": 10,
+    "huang": 60,
+    "hong": 30,
+    "uph": 0,
+    "xt": "2#"
+  }, {
+    "jhdcl": 0.0701,
+    "wlqtl": 0.4536,
+    "lv": 20,
+    "huang": 50,
+    "hong": 30,
+    "uph": 0,
+    "xt": "3#"
+  }, {
+    "jhdcl": 0,
+    "wlqtl": 0,
+    "lv": 10,
+    "huang": 10,
+    "hong": 80,
+    "uph": 0,
+    "xt": "4#"
+  }, {
+    "jhdcl": 0.0000,
+    "wlqtl": 1.0000,
+    "lv": 50,
+    "huang": 11,
+    "hong": 39,
+    "uph": 0,
+    "xt": "5#"
+  }, {
+    "jhdcl": 0.0000,
+    "wlqtl": 0.6985,
+    "lv": 0,
+    "huang": 100,
+    "hong": 0,
+    "uph": 0,
+    "xt": "6#"
+  }, {
+    "jhdcl": 0.0000,
+    "wlqtl": 1.0000,
+    "lv": 100,
+    "huang": 0,
+    "hong": 0,
+    "uph": 0,
+    "xt": "7#"
+  }, {
+    "jhdcl": 0.0000,
+    "wlqtl": 0.7379,
+    "lv": 0,
+    "huang": 0,
+    "hong": 100,
+    "uph": 0,
+    "xt": "8#"
+  }],
+  "ycqk": {
+    "data": [{
+      "zjzs": 0,
+      "jtzs": 0,
+      "yx": 0,
+      "dj": 0,
+      "bj": 0,
+      "lx": 0
+    }],
+    "yc": {
+      "ctl": 0,
+      "ydl": 0,
+      "zjshl": 0,
+      "OQC": 0
+    }
+  }
+}
