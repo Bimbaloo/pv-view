@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <script src="public/js/echarts.common.js"></script>
-  <script src="public/js/vue.js"></script>
-  <script src="public/element-ui/index.js"></script>
-  <link rel="stylesheet" href="public/element-ui/theme-chalk/index.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/base.css">
-  <script src="public/js/axios.js"></script>
+  <script src="echarts.common.js"></script>
+  <script src="vue.js"></script>
+  <script src="element-ui/index.js"></script>
+  <link rel="stylesheet" href="element-ui/theme-chalk/index.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="base.css">
+  <script src="axios.js"></script>
   <title>车间看板</title>
 </head>
 
@@ -135,7 +135,7 @@
       </div>
 
       <div id="container" style="height: 80%;width: 70%;"></div>
-      <el-table ref="table5" :data="tableData.data5" style="width: 100%" height='750'>
+      <el-table ref="table5" :data="tableData.data5" style="width: 100%" height='972'>
         <el-table-column v-for="col in columns5" :key="col.prop" :label="col.label" :prop="col.prop"
           :class-name="col.class" align='center'>
         </el-table-column>
@@ -144,7 +144,7 @@
     </div>
 
   </div>
-  <script src="/js/base.js"></script>
+  <script src="base.js"></script>
 </body>
 
 </html>
