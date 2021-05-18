@@ -25,3 +25,17 @@ Content-Type: application/json
   "cj":"三课一",
   "sbglcj":"组测三课一车间"
 }
+
+### 发送JSON数据
+
+post http:rap/mes/cjkb/execute
+Content-Type: application/json
+//这里必须有一空行
+
+{
+  "gc":"1530",
+  "lh":"新基地4#",
+  "ks":"组测三课",
+  "cj":"三课一",
+  "sbglcj":"组测三课一车间"
+}

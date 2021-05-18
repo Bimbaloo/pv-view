@@ -1,11 +1,13 @@
 var Main = new Vue({
   el: '#app',
-  name: app,
+  name: "app",
   data: {
+    width: 265,
+    strokeWidth: 32,
+    time: '',
     timeDatas: [
       "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00", "02:00", "04:00", "06:00", "08:00"
     ],
-    width: 200,
     qjd: 92, //清洁度
     wlqtl: 68, //物料齐套率
     sbdjs: 20, //设备点击率，
@@ -79,18 +81,22 @@ var Main = new Vue({
           label: '运行',
           prop: 'yx',
           align: 'center',
+          class: 'lv'
         }, {
           label: '待机',
           prop: 'dj',
           align: 'center',
+          class: 'huang'
         }, {
           label: '报警',
           prop: 'bj',
           align: 'center',
+          class: 'hong'
         }, {
           label: '离线',
           prop: 'lx',
           align: 'center',
+          class: 'hui'
         }],
       data4: [], // 异常情况表格
       columns5: [
@@ -113,28 +119,27 @@ var Main = new Vue({
     },
     colors: [
       {
-        color: '#f56c6c',
+        color: '#F56C6C',
         percentage: 20
       },
       {
-        color: '#e6a23c',
+        color: '#F56C6C',
         percentage: 40
       },
       {
-        color: '#5cb87a',
+        color: '#E6A23C',
         percentage: 60
       },
       {
-        color: '#1989fa',
+        color: '#4caf50',
         percentage: 80
       },
       {
-        color: '#6f7ad3',
+        color: '#4caf50',
         percentage: 100
       }
     ],
     percentage: 90,
-    width: 200,
     // echarts 的 option
     echartsOption: {
       tooltip: {
@@ -146,20 +151,40 @@ var Main = new Vue({
       legend: {
         data: ['入库', '物料齐套', '总计划'],
         left: 'center',
-        bottom: 'bottom',
+        bottom: '3%',
+        itemWidth: 100,
+        itemHeight: 40,
+        textStyle: {
+          color: "#fff",
+          fontSize: 30,
+          fontWeight: "bold"
+        },
       },
       grid: {
         left: '3%',
-        right: '4%',
-        bottom: '3%',
+        right: '3%',
+        bottom: '10%',
+        top: '0',
         containLabel: true
       },
       xAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+          fontWeight: "bold",
+          fontSize: 30,
+          color: "#fff",
+          align: "center"
+        }
       },
       yAxis: {
         type: 'category',
-        data: ['1#', '2#', '3#', '4#', '5#', '6#', '7#']
+        data: ['1#', '2#', '3#', '4#', '5#', '6#', '7#'],
+        axisLabel: {
+          fontWeight: "bold",
+          fontSize: 30,
+          color: "#fff",
+          lineHeight: '50'
+        }
       },
       series: [
         {
@@ -167,7 +192,7 @@ var Main = new Vue({
           type: 'bar',
           stack: 'total',
           label: {
-            show: true
+            show: false
           },
           emphasis: {
             focus: 'series'
@@ -179,7 +204,7 @@ var Main = new Vue({
           type: 'bar',
           stack: 'total',
           label: {
-            show: true
+            show: false
           },
           emphasis: {
             focus: 'series'
@@ -191,7 +216,7 @@ var Main = new Vue({
           type: 'bar',
           stack: 'total',
           label: {
-            show: true
+            show: false
           },
           emphasis: {
             focus: 'series'
@@ -224,8 +249,18 @@ var Main = new Vue({
       })
     }
   },
+  created: function () {
+
+
+  },
   mounted: function () {
+    this.currentTime()
     this.getData()
+  },
+  beforeDestroy() {
+    if (this.formatDate) {
+      clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
+    }
   },
   methods: {
     // 获取数据
@@ -233,16 +268,15 @@ var Main = new Vue({
       const options = {
         // method: 'GET',
         method: 'POST',
-        // url: '../assets/mock.json',
-        // url: 'http://192.168.46.10:9201/mes/cjkb/execute',
-        url: 'http://192.168.120.62/mes/cjkb/execute',
+        // url: '../assets/mock.json',                         // 本地mock数据，需要使用get
+        // url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 张杭烃本地
+        url: 'http://192.168.120.62/mes/cjkb/execute',         // 服务器
         headers: { 'user-agent': 'vscode-restclient', 'content-type': 'application/json' },
         data: { gc: '1530', lh: '新基地4#', ks: '组测三课', cj: '三课一', sbglcj: '组测三课一车间' }
       };
 
       this.$nextTick(() => {
-
-        axios.post('http://192.168.46.10/mes/cjkb/execute', options.data)
+        axios.post(options.url, options.data)
           .then((response) => {
             console.log(response);
             this.updateData(response.data)
@@ -254,12 +288,6 @@ var Main = new Vue({
             console.log(error);
           });
 
-        // axios.request(options).then((response) => {
-        //   console.log(response.data);
-        //   this.updateData(response.data)
-        // }).catch((error) => {
-        //   console.error(error);
-        // });
       })
     },
     // 更新数据
@@ -312,9 +340,29 @@ var Main = new Vue({
       if (option && typeof option === 'object') {
         myChart.setOption(option);
       }
+    },
+
+    // 计算时间
+    formatDate() {
+      let date = new Date();
+      let year = date.getFullYear(); // 年
+      let month = date.getMonth() + 1; // 月
+      let day = date.getDate(); // 日
+      let week = date.getDay(); // 星期
+      let weekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+      let hour = date.getHours(); // 时
+      hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
+      let minute = date.getMinutes(); // 分
+      minute = minute < 10 ? "0" + minute : minute; // 如果只有一位，则前面补零
+      let second = date.getSeconds(); // 秒
+      second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
+      this.time = `${year}年${month}月${day}日${hour}:${minute}:${second} ${weekArr[week]}`
+
+    },
+    // 实时更新时间
+    currentTime() {
+      setInterval(this.formatDate, 500);
     }
-
-
   }
 })
 
