@@ -15,6 +15,7 @@ var Main = new Vue({
     ydl: 10, // 移动率
     OQC: 20, // OQC
     zjshl: 20, // 治具损坏率
+    percentage: 90,
     percentage1: 20,
     percentage2: 90,
     tableData: {
@@ -139,7 +140,7 @@ var Main = new Vue({
         percentage: 100
       }
     ],
-    percentage: 90,
+
     // echarts 的 option
     echartsOption: {
       tooltip: {
@@ -271,6 +272,7 @@ var Main = new Vue({
         // url: '../assets/mock.json',                         // 本地mock数据，需要使用get
         url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 服务器
         // url: 'http://192.168.120.62/mes/cjkb/execute',         // 张杭烃本地
+        // url: 'http:rap/mes/cjkb/execute',
         headers: { 'user-agent': 'vscode-restclient', 'content-type': 'application/json' },
         data: { gc: '1530', lh: '新基地4#', ks: '组测三课', cj: '三课一', sbglcj: '组测三课一车间' }
       };
@@ -282,7 +284,7 @@ var Main = new Vue({
             this.updateData(response.data)
             setTimeout(() => {
               this.getData()
-            }, 5 * 60 * 1000)
+            }, 30 * 60 * 1000)
           })
           .catch((error) => {
             console.log(error);
@@ -293,9 +295,9 @@ var Main = new Vue({
     // 更新数据
     updateData(options) {
       // 产前准备
-      this.qjd = options.cqzb[0].qjd * 100
-      this.wlqtl = options.cqzb[0].wlqtl * 100
-      this.sbdjs = options.cqzb[0].sbdjs * 100
+      this.qjd = Number((options.cqzb[0].qjd * 100).toFixed(2))
+      this.wlqtl = Number((options.cqzb[0].wlqtl * 100).toFixed(2))
+      this.sbdjs = Number((options.cqzb[0].sbdjs * 100).toFixed(2))
 
       // 定额人员
       this.tableData.data = options.derycq
@@ -307,10 +309,10 @@ var Main = new Vue({
       // 异常情况
       this.tableData.data4 = options.ycqk.data
 
-      this.ctl = options.ycqk.yc.ctl      // 设备直通率
-      this.ydl = options.ycqk.yc.ydl      // 移动率
-      this.zjshl = options.ycqk.yc.zjshl  // 治具损坏率
-      this.OQC = options.ycqk.yc.OQC      // OQC
+      this.ctl = Number(options.ycqk.yc.ctl.toFixed(2))     // 设备直通率
+      this.ydl = Number(options.ycqk.yc.ydl.toFixed(2))    // 移动率
+      this.zjshl = Number(options.ycqk.yc.zjshl.toFixed(2))  // 治具损坏率
+      this.OQC = Number(options.ycqk.yc.OQC.toFixed(2))     // OQC
 
 
       // 生产进度
