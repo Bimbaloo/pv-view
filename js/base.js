@@ -269,8 +269,8 @@ var Main = new Vue({
         // method: 'GET',
         method: 'POST',
         // url: '../assets/mock.json',                         // 本地mock数据，需要使用get
-        // url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 张杭烃本地
-        url: 'http://192.168.120.62/mes/cjkb/execute',         // 服务器
+        url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 服务器
+        // url: 'http://192.168.120.62/mes/cjkb/execute',         // 张杭烃本地
         headers: { 'user-agent': 'vscode-restclient', 'content-type': 'application/json' },
         data: { gc: '1530', lh: '新基地4#', ks: '组测三课', cj: '三课一', sbglcj: '组测三课一车间' }
       };
