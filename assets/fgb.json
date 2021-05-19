@@ -1,33 +1,121 @@
 {
-    "errorCode": 0,
-    "errorMsg": "",
-    "data": [{
-        "Achievement": "50%",
-        "material": "20%",
-        "UPH": "30%"
+    "cqzb": [{
+        "qjd": 1.0000,
+        "wlqtl": 0.9438,
+        "sbdjs": 0
+    }],
+    "fderycq2": [{
+        "sjcq": "0",
+        "xl": "制造",
+        "zzrs": "6"
     }, {
-        "Achievement": "30%",
-        "material": "40%",
-        "UPH": "30%"
+        "sjcq": "0",
+        "xl": "品保",
+        "zzrs": "0"
+    }],
+    "fderycq1": [{
+        "sjcq": "0",
+        "xl": "工艺",
+        "zzrs": "5"
     }, {
-        "Achievement": "20%",
-        "material": "10%",
-        "UPH": "70"
+        "sjcq": "0",
+        "xl": "设备",
+        "zzrs": "1"
+    }],
+    "ycqk": {
+        "data": [{
+            "zjzs": 0,
+            "jtzs": 0,
+            "dj": 0,
+            "bj": 0,
+            "lx": 0,
+            "yx": 0
+        }],
+        "yc": {
+            "ydl": 0,
+            "OQC": 0,
+            "ctl": 0,
+            "zjshl": 0
+        }
+    },
+    "derycq": [{
+        "sjcq": 0,
+        "ccq": 0.0000,
+        "ycq": 0,
+        "zzrs": 129,
+        "cql": 0.0000
+    }],
+    "scjd": [{
+        "hong": 1,
+        "jhdcl": 0,
+        "lv": 0,
+        "wlqtl": 0,
+        "xt": "",
+        "uph": "0",
+        "huang": 0
     }, {
-        "Achievement": "63%",
-        "material": "17%",
-        "UPH": "20%"
+        "hong": 0.0054,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 0.9946,
+        "xt": "1#",
+        "uph": "0",
+        "huang": 0.9946
     }, {
-        "Achievement": "53%",
-        "material": "17%",
-        "UPH": "30%"
+        "hong": 1,
+        "jhdcl": 0,
+        "lv": 0,
+        "wlqtl": 0,
+        "xt": "2#",
+        "uph": "0",
+        "huang": 0
     }, {
-        "Achievement": "43%",
-        "material": "27%",
-        "UPH": "30%"
+        "hong": 0.1492,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 0.8508,
+        "xt": "3#",
+        "uph": "0",
+        "huang": 0.8508
     }, {
-        "Achievement": "13%",
-        "material": "37%",
-        "UPH": "50%"
+        "hong": 1,
+        "jhdcl": 0,
+        "lv": 0,
+        "wlqtl": 0,
+        "xt": "4#",
+        "uph": "0",
+        "huang": 0
+    }, {
+        "hong": 0.0002,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 0.9998,
+        "xt": "5#",
+        "uph": "0",
+        "huang": 0.9998
+    }, {
+        "hong": 0.2250,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 0.7750,
+        "xt": "6#",
+        "uph": "0",
+        "huang": 0.7750
+    }, {
+        "hong": 0.0002,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 0.9998,
+        "xt": "7#",
+        "uph": "0",
+        "huang": 0.9998
+    }, {
+        "hong": 0.0000,
+        "jhdcl": 0.0000,
+        "lv": 0.0000,
+        "wlqtl": 1.0000,
+        "xt": "8#",
+        "uph": "0",
+        "huang": 1.0000
     }]
 }

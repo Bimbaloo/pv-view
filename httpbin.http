@@ -28,8 +28,8 @@ Content-Type: application/json
 
 ### 发送JSON数据
 
-post  http:rap/mes/cjkb/execute
-//这里必须有一空行
+post  http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999
+//rap2模拟数据（时间间隔可以缩小）
 
 { 
   "gc":"1530",

@@ -227,7 +227,8 @@ var Main = new Vue({
 
 
       ]
-    }
+    },
+    myChart: null
   },
   computed: {
     columns() {
@@ -272,7 +273,7 @@ var Main = new Vue({
         // url: '../assets/mock.json',                         // 本地mock数据，需要使用get
         url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 服务器
         // url: 'http://192.168.120.62/mes/cjkb/execute',         // 张杭烃本地
-        // url: 'http:rap/mes/cjkb/execute',
+        // url: 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999',   // rap2模拟数据
         headers: { 'user-agent': 'vscode-restclient', 'content-type': 'application/json' },
         data: { gc: '1530', lh: '新基地4#', ks: '组测三课', cj: '三课一', sbglcj: '组测三课一车间' }
       };
@@ -336,11 +337,15 @@ var Main = new Vue({
       this.echartsOption.series[2].data = hong
 
       let dom = document.getElementById("container");
-      let myChart = echarts.init(dom);
+      if (!this.myChart) {
+        let myChart = echarts.init(dom);
+        this.myChart = myChart
+      }
+      // let myChart = echarts.init(dom);
 
       let option = this.echartsOption
       if (option && typeof option === 'object') {
-        myChart.setOption(option);
+        this.myChart.setOption(option);
       }
     },
 
