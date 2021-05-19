@@ -279,16 +279,21 @@ var Main = new Vue({
       };
 
       this.$nextTick(() => {
-        axios.post(options.url, options.data)
+        axios.post(options.url, options.data, { timeout: 10000 })
           .then((response) => {
             console.log(response);
             this.updateData(response.data)
+            // 每半小时更新数据
             setTimeout(() => {
               this.getData()
             }, 30 * 60 * 1000)
           })
           .catch((error) => {
             console.log(error);
+            // 因为网络等问题获取数据失败，每半小时重新获取
+            setTimeout(() => {
+              this.getData()
+            }, 30 * 60 * 1000)
           });
 
       })
