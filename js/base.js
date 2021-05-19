@@ -152,7 +152,7 @@ var Main = new Vue({
       legend: {
         data: ['入库', '物料齐套', '总计划'],
         left: 'center',
-        bottom: '3%',
+        bottom: '1%',
         itemWidth: 100,
         itemHeight: 40,
         textStyle: {

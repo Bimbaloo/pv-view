@@ -10,7 +10,12 @@
 
 ### 请求URL ###
 
-`192.168.120.62:9201/quality/inspect/by-equipment-time`
+```
+ url: '../assets/mock.json',                         // 本地mock数据，需要使用get
+ url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 服务器
+ url: 'http://192.168.120.62/mes/cjkb/execute',         // 张杭烃本地
+ url: 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999',   // rap2模拟数据
+```
 
 ### 请求参数 ###
 

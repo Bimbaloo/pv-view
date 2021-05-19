@@ -231,11 +231,11 @@ td.hui>.cell {
 }
 
 .progress-table th>.cell {
-  height: 60px;
+  height: 55px;
 }
 .progress-table td>.cell{
-  height: 67px;
-  line-height: 67px;
+  height: 63px;
+  line-height: 63px;
 }
 
 .el-table .cell {
