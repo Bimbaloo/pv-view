@@ -4,7 +4,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import './assets/css/reset.css'
 
-
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
