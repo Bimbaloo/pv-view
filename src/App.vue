@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <Head />
-    <HelloWorld />
+    <Top />
+    <Content />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Head from './components/Head.vue'
+import Content from './components/Content'
+import Top from './components/Top.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Head
+    Content,
+    Top
   }
 }
 </script>
