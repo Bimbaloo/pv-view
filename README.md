@@ -1,19 +1,19 @@
-# pc-view
-
-## Project setup
+# pc-view（标杆车间课室看板）
+使用 @vue/cli3 重构版本
+## 安装依赖
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 启动服务和热更新
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 打包构建
 ```
 yarn build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 配置详情
+[@vue/cli3详细配置](https://cli.vuejs.org/config/).
