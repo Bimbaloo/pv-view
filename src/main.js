@@ -6,11 +6,17 @@ import App from './App.vue'
 import * as echarts from 'echarts'
 
 import './assets/css/reset.css'
+
+import VConsole from 'vconsole'
+const vConsole = new VConsole()
+
 Vue.prototype.axios = axios
 Vue.prototype.echarts = echarts
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, vConsole)
 Vue.config.productionTip = false
+
+console.info('vconsole-info-测试')
 
 new Vue({
   render: h => h(App)
