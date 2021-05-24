@@ -184,17 +184,17 @@
   </div>
 </template>
 <script>
-const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
+// const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
 // const url = 'http://192.168.120.62/mes/cjkb/execute' // 张杭烃本地
-// const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
+const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
 
 // 查询条件
 const data = {
   gc: '1530',
   lh: '新基地4#',
-  ks: '组测三课',
-  cj: '三课一',
-  sbglcj: '组测三课一车间'
+  ks: 'COB三课',
+  cj: '393',
+  sbglcj: 'COB三课标杆车间'
 }
 
 // 最长查询时间
@@ -749,8 +749,8 @@ th {
     padding: 1px;
   }
   .progress-table td > .cell {
-    // height: 45px;
-    // line-height: 45px;
+    height: 32px;
+    line-height: 32px;
   }
   .el-table .cell {
     // line-height: 50px;
