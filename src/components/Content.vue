@@ -695,7 +695,7 @@ th {
   .progress-box2 {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 1.3vh;
+    margin-top: 1.5vh;
     margin-bottom: 2vh;
     align-items: center;
   }
