@@ -167,7 +167,7 @@
           ref="table5"
           :data="tableData.data5"
           style="width: 100%"
-          height="265"
+          height="270"
         >
           <el-table-column
             v-for="col in columns5"
@@ -398,7 +398,7 @@ export default {
           }
         },
         grid: {
-          left: '3%',
+          left: '1%',
           right: '3%',
           bottom: '10%',
           top: '0',
@@ -410,8 +410,10 @@ export default {
             fontWeight: 'bold',
             fontSize: 15,
             color: '#fff',
-            align: 'center'
-          }
+            align: 'center',
+            show: false
+          },
+          interval: 1 / 12
         },
         yAxis: {
           type: 'category',
@@ -421,7 +423,8 @@ export default {
             fontSize: 10,
             color: '#fff'
             // lineHeight: '10'
-          }
+          },
+          inverse: true
         },
         series: [
           {
@@ -759,8 +762,8 @@ th {
     padding: 1px;
   }
   .progress-table td > .cell {
-    // height: 45px;
-    // line-height: 45px;
+    height: 26px;
+    line-height: 26px;
   }
   .el-table .cell {
     // line-height: 50px;
