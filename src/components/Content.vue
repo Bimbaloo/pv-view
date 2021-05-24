@@ -71,7 +71,7 @@
     </div>
     <!-- 异常 -->
     <div class="abnormal">
-      <div class="designation">
+      <div class="designation" style="padding-top:1vh">
         <i class="el-icon-menu"></i>
         <span>过程监控</span>
       </div>
@@ -153,7 +153,7 @@
         <i class="el-icon-menu"></i>
         <span>生产进度</span>
       </div>
-      <div class="left" style="height: 45vh;width: 70vw;">
+      <div class="left" style="height: 45vh;width: 65vw;">
         <div class="timebox">
           <div v-for="(timeData, index) in timeDatas" :key="index">
             {{ timeData }}
@@ -161,7 +161,7 @@
         </div>
         <div id="container" style="height:265px"></div>
       </div>
-      <div class="right" style="height: 45vh;width: 30vw;">
+      <div class="right" style="height: 45vh;width: 35vw;">
         <el-table
           class="progress-table"
           ref="table5"
@@ -323,6 +323,12 @@ export default {
         ],
         data4: [], // 异常情况表格
         columns5: [
+          {
+            label: '计划投入数',
+            prop: 'jhtrs',
+            align: 'center'
+          },
+
           {
             label: '计划达成率',
             prop: 'jhdcl',
@@ -523,6 +529,10 @@ export default {
       this.sbdjs = (options.cqzb[0].sbdjs * 10000) / 100
 
       // 定额人员
+      options.derycq.forEach(el => {
+        el.ccq = (el.ccq * 10000) / 100 + '%'
+        el.cql = (el.cql * 10000) / 100 + '%'
+      })
       this.tableData.data = options.derycq
 
       // 非定额人员
@@ -546,9 +556,9 @@ export default {
       const huang = []
       const hong = []
       options.scjd.forEach(el => {
-        el.jhdcl = (el.jhdcl * 100).toFixed(2)
-        el.wlqtl = (el.wlqtl * 100).toFixed(2)
-        el.ztl = (el.ztl * 100).toFixed(2)
+        el.jhdcl = (el.jhdcl * 10000) / 100 + '%'
+        el.wlqtl = (el.wlqtl * 10000) / 100 + '%'
+        el.ztl = (el.ztl * 10000) / 100 + '%'
 
         data.push(el.xt)
         lv.push(el.lv)
@@ -743,7 +753,7 @@ th {
     background-color: #f14135;
   }
   .progress-table th > .cell {
-    // height: 55px;
+    height: 16px;
   }
   .progress-table td {
     padding: 1px;
