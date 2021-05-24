@@ -175,6 +175,7 @@
             :label="col.label"
             :prop="col.prop"
             :class-name="col.class"
+            :min-width="col.width"
             align="center"
           >
           </el-table-column>
@@ -326,27 +327,32 @@ export default {
           {
             label: '计划投入数',
             prop: 'jhtrs',
-            align: 'center'
+            align: 'center',
+            width: 85
           },
           {
             label: '计划达成率',
             prop: 'jhdcl',
-            align: 'center'
+            align: 'center',
+            width: 85
           },
           {
             label: '物料齐通率',
             prop: 'wlqtl',
-            align: 'center'
+            align: 'center',
+            width: 85
           },
           {
             label: '实际UPH',
             prop: 'uph',
-            align: 'center'
+            align: 'center',
+            width: 80
           },
           {
             label: '直通率',
             prop: 'ztl',
-            align: 'center'
+            align: 'center',
+            width: 80
           }
         ],
         data5: [],
@@ -397,7 +403,7 @@ export default {
           }
         },
         grid: {
-          left: '3%',
+          left: '1%',
           right: '3%',
           bottom: '10%',
           top: '0',
