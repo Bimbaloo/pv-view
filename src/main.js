@@ -16,8 +16,6 @@ Vue.prototype.echarts = echarts
 Vue.use(ElementUI, vConsole)
 Vue.config.productionTip = false
 
-console.info('vconsole-info-测试')
-
 new Vue({
   render: h => h(App)
 }).$mount('#app')

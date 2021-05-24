@@ -20,7 +20,7 @@ export default {
 
 <style lang="less">
 #app {
-  background-color: hsl(236deg 100% 16%);
+  background-color: #000552;
   display: flex;
   flex-direction: row;
   flex-flow: wrap;

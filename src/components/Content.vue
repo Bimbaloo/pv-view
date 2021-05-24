@@ -10,19 +10,19 @@
           <div class="progress-box">
             <el-progress
               type="dashboard"
-              :percentage="qjd"
+              :percentage="sbdjs"
               :stroke-width="strokeWidth"
               :color="colors"
               :width="width"
             >
             </el-progress>
-            <span>设备点击率</span>
+            <span>设备点检率</span>
           </div>
 
           <div class="progress-box">
             <el-progress
               type="dashboard"
-              :percentage="wlqtl"
+              :percentage="qjd"
               :stroke-width="strokeWidth"
               :color="colors"
               :width="width"
@@ -33,7 +33,7 @@
           <div class="progress-box">
             <el-progress
               type="dashboard"
-              :percentage="sbdjs"
+              :percentage="wlqtl"
               :stroke-width="strokeWidth"
               :color="colors"
               :width="width"
@@ -46,14 +46,15 @@
       <!-- 出勤 -->
       <div class="chuqing">
         <div class="designation">
-          <i class="el-icon-menu"></i>
-          <span>定额人员出勤</span>
+          <span style="display: inline-block;margin-left: 30px;"
+            >定额人员出勤</span
+          >
         </div>
         <div class="table-message">
           <el-table
             ref="table"
             :data="tableData.data"
-            style="width: 100%;margin-top: 20px;"
+            style="width: 100%;margin-top: 5px;"
           >
             <el-table-column
               v-for="col in columns"
@@ -74,7 +75,7 @@
         <i class="el-icon-menu"></i>
         <span>过程监控</span>
       </div>
-      <div class="table-message" style="margin-top: 50px;">
+      <div class="table-message">
         <el-table ref="table4" :data="tableData.data4" style="width: 100%">
           <el-table-column
             v-for="col in columns4"
@@ -87,19 +88,7 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="progress-boxs" style="margin-top: 50px;">
-        <div class="progress-box">
-          <el-progress
-            type="dashboard"
-            :percentage="lv"
-            :stroke-width="strokeWidth"
-            :color="colors"
-            :width="width"
-          >
-          </el-progress>
-          <span>良率 </span>
-        </div>
-
+      <div class="progress-boxs" style="margin-top:0">
         <div class="progress-box">
           <el-progress
             type="dashboard"
@@ -109,7 +98,19 @@
             :width="width"
           >
           </el-progress>
-          <span>计划达成率</span>
+          <span>计划完工率</span>
+        </div>
+
+        <div class="progress-box">
+          <el-progress
+            type="dashboard"
+            :percentage="ztl"
+            :stroke-width="strokeWidth"
+            :color="colors"
+            :width="width"
+          >
+          </el-progress>
+          <span>直通率</span>
         </div>
 
         <div class="progress-box">
@@ -130,9 +131,9 @@
             治具损坏率
           </div>
           <el-progress
-            :stroke-width="50"
+            :stroke-width="10"
             :percentage="zjshl"
-            color="#4caf50"
+            color="#f14135"
           ></el-progress>
         </div>
         <div class="progress-box2">
@@ -140,33 +141,33 @@
             OQC批退率
           </div>
           <el-progress
-            :stroke-width="50"
+            :stroke-width="10"
             :percentage="OQC"
-            color="#4caf50"
+            color="#f14135"
           ></el-progress>
         </div>
       </div>
     </div>
     <div class="progress">
-      <div class="designation" style="width: 100%;">
+      <div class="designation" style="width: 100vw;height:5vh;line-height:5vh">
         <i class="el-icon-menu"></i>
         <span>生产进度</span>
       </div>
-      <div class="left" style="height: 80%;width: 70%;">
+      <div class="left" style="height: 45vh;width: 70vw;">
         <div class="timebox">
           <div v-for="(timeData, index) in timeDatas" :key="index">
             {{ timeData }}
           </div>
         </div>
-        <div id="container" style="height: 740px;"></div>
+        <div id="container" style="height:265px"></div>
       </div>
-      <div class="right" style="height: 80%;width: 30%;">
+      <div class="right" style="height: 45vh;width: 30vw;">
         <el-table
           class="progress-table"
           ref="table5"
           :data="tableData.data5"
           style="width: 100%"
-          height="750"
+          height="265"
         >
           <el-table-column
             v-for="col in columns5"
@@ -183,9 +184,9 @@
   </div>
 </template>
 <script>
-// const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
+const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
 // const url = 'http://192.168.120.62/mes/cjkb/execute' // 张杭烃本地
-const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
+// const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
 
 // 查询条件
 const data = {
@@ -199,14 +200,14 @@ const data = {
 // 最长查询时间
 const timeout = { timeout: 50000 }
 // 轮询的时间
-const time = 6 * 1000
+const time = 30 * 60 * 1000
 
 export default {
   name: 'PcViewContent',
   data () {
     return {
-      width: 265,
-      strokeWidth: 32,
+      width: 90,
+      strokeWidth: 12,
       timeDatas: [
         '08:00',
         '10:00',
@@ -226,7 +227,7 @@ export default {
       wlqtl: 68, // 物料齐套率
       sbdjs: 20, // 设备点击率，
       ctl: 10, // 设备直通率
-      ztv: 10, // 直通率
+      ztl: 10, // 直通率
       lv: 10, // 良率
       jhdcl: 10, // 计划达成率
       ydl: 10, // 移动率
@@ -338,8 +339,8 @@ export default {
             align: 'center'
           },
           {
-            label: '良率',
-            prop: 'lpv',
+            label: '直通率',
+            prop: 'ztl',
             align: 'center'
           }
         ],
@@ -347,22 +348,22 @@ export default {
         height: 100
       },
       colors: [
+        // {
+        //   color: '#F56C6C',
+        //   percentage: 20
+        // },
+        // {
+        //   color: '#F56C6C',
+        //   percentage: 40
+        // },
         {
-          color: '#F56C6C',
-          percentage: 20
-        },
-        {
-          color: '#F56C6C',
-          percentage: 40
-        },
-        {
-          color: '#E6A23C',
+          color: '#ffc107',
           percentage: 60
         },
-        {
-          color: '#4caf50',
-          percentage: 80
-        },
+        // {
+        //   color: '#4caf50',
+        //   percentage: 80
+        // },
         {
           color: '#4caf50',
           percentage: 100
@@ -382,11 +383,11 @@ export default {
           data: ['入库', '物料齐套', '总计划'],
           left: 'center',
           bottom: '1%',
-          itemWidth: 100,
-          itemHeight: 40,
+          itemWidth: 20,
+          itemHeight: 15,
           textStyle: {
             color: '#fff',
-            fontSize: 30,
+            fontSize: 10,
             fontWeight: 'bold'
           }
         },
@@ -401,7 +402,7 @@ export default {
           type: 'value',
           axisLabel: {
             fontWeight: 'bold',
-            fontSize: 30,
+            fontSize: 15,
             color: '#fff',
             align: 'center'
           }
@@ -411,9 +412,9 @@ export default {
           data: ['1#', '2#', '3#', '4#', '5#', '6#', '7#'],
           axisLabel: {
             fontWeight: 'bold',
-            fontSize: 30,
-            color: '#fff',
-            lineHeight: '50'
+            fontSize: 10,
+            color: '#fff'
+            // lineHeight: '10'
           }
         },
         series: [
@@ -421,6 +422,7 @@ export default {
             name: '入库',
             type: 'bar',
             stack: 'total',
+            itemStyle: { color: 'rgb(76, 175, 80)' },
             label: {
               show: false
             },
@@ -433,6 +435,7 @@ export default {
             name: '物料齐套',
             type: 'bar',
             stack: 'total',
+            itemStyle: { color: '#ffeb3b' },
             label: {
               show: false
             },
@@ -445,6 +448,7 @@ export default {
             name: '总计划',
             type: 'bar',
             stack: 'total',
+            itemStyle: { color: '#f14135' },
             label: {
               show: false
             },
@@ -479,7 +483,6 @@ export default {
       })
     }
   },
-
   mounted () {
     this.getData()
   },
@@ -515,9 +518,9 @@ export default {
     // 更新数据
     updateData (options) {
       // 产前准备
-      this.qjd = Number((options.cqzb[0].qjd * 100).toFixed(2))
-      this.wlqtl = Number((options.cqzb[0].wlqtl * 100).toFixed(2))
-      this.sbdjs = Number((options.cqzb[0].sbdjs * 100).toFixed(2))
+      this.qjd = (options.cqzb[0].qjd * 10000) / 100
+      this.wlqtl = (options.cqzb[0].wlqtl * 10000) / 100
+      this.sbdjs = (options.cqzb[0].sbdjs * 10000) / 100
 
       // 定额人员
       this.tableData.data = options.derycq
@@ -529,13 +532,13 @@ export default {
       // 异常情况
       this.tableData.data4 = options.ycqk.data
 
-      this.ctl = Number(options.ycqk.yc.ctl.toFixed(2) * 100) // 设备直通率
-      this.ydl = Number(options.ycqk.yc.ydl.toFixed(2) * 100) // 移动率
-      this.jhdcl = Number(options.ycqk.yc.jhdcl.toFixed(2) * 100) // 计划达成率
-      this.lv = Number(options.ycqk.yc.lv.toFixed(2) * 100) // 良率
+      this.ctl = (options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
+      this.ydl = (options.ycqk.yc.ydl * 10000) / 100 // 移动率
+      this.jhdcl = (options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
+      this.ztl = (options.ycqk.yc.ztl * 10000) / 100 // 良率
 
-      this.zjshl = Number(options.ycqk.yc.zjshl.toFixed(2) * 100) // 治具损坏率
-      this.OQC = Number(options.ycqk.yc.OQC.toFixed(2) * 100) // OQC
+      this.zjshl = (options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
+      this.OQC = (options.ycqk.yc.OQC * 10000) / 100 // OQC
 
       // 生产进度
       const data = []
@@ -545,6 +548,8 @@ export default {
       options.scjd.forEach(el => {
         el.jhdcl = (el.jhdcl * 100).toFixed(2)
         el.wlqtl = (el.wlqtl * 100).toFixed(2)
+        el.ztl = (el.ztl * 100).toFixed(2)
+
         data.push(el.xt)
         lv.push(el.lv)
         huang.push(el.huang)
@@ -576,36 +581,36 @@ export default {
 <style lang="less">
 .table-message td,
 th {
-  background-color: hsl(236deg 100% 16%) !important;
-  border: 1px solid hsl(236deg 100% 16%);
+  background-color: #000552 !important;
+  border: 1px solid #000552;
 }
 .el-table td,
 .el-table th.is-leaf {
-  border: 1px solid hsl(236deg 100% 16%);
+  border: 1px solid #000552;
 }
 .el-table th,
-.el-table tr {
-  background-color: hsl(236deg 100% 16%) !important;
+.el-table td {
+  background-color: #000552 !important;
+  padding: 6px 0;
 }
 .el-table {
   color: #fff;
   font-weight: bold;
-  font-size: 30px;
 }
 .el-table,
 .el-table__expanded-cell {
-  background-color: hsl(236deg 100% 16%) !important;
+  background-color: #000552 !important;
 }
 .el-table th > .cell {
-  height: 55px;
+  // height: 1vh;
   color: #fff;
   font-weight: bold;
-  font-size: 40px;
-  line-height: 55px;
+  font-size: 1vw;
+  line-height: 2vh;
 }
 .el-table td > .cell {
-  height: 50px;
-  font-size: 40px;
+  // height: 1vh;
+  font-size: 1vw;
   color: rgb(213, 104, 13);
 }
 
@@ -613,51 +618,55 @@ th {
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
-  width: 100%;
+  width: 100vw;
   height: 90vh;
+  justify-content: space-evenly;
 
   .designation {
     color: #fff;
-    font-size: 60px;
+    font-size: 1.5vw;
   }
 
   .progress-boxs {
     display: flex;
     justify-content: space-around;
-    margin-top: 25px;
+    margin-top: 1.1vh;
     .progress-box span {
       color: #fff;
       font-weight: bold;
-      font-size: 40px;
+      font-size: 1vw;
     }
   }
 
   .Production {
     height: 40vh;
-    width: 50%;
+    width: 50vw;
+    border-right: 5px solid #12204d;
+    border-bottom: 10px solid #12204d;
     box-sizing: border-box;
-
-    .ready {
-      padding-top: 10px;
-      height: 20vh;
-    }
-
+    .ready,
     .chuqing {
-      padding-top: 10px;
-      height: 20vh;
+      padding-top: 1vh;
+      height: 23vh;
+    }
+    .chuqing {
+      height: 15vh;
     }
   }
 
   /* 异常 */
   .abnormal {
     height: 40vh;
-    width: 50%;
+    width: 50vw;
+    border-left: 5px solid #12204d;
+    border-bottom: 10px solid #12204d;
+
     box-sizing: border-box;
   }
 
   .progress {
-    width: 100%;
-    height: 45%;
+    width: 100vw;
+    height: 50vh;
   }
 
   .el-icon-menu {
@@ -670,14 +679,11 @@ th {
     flex-direction: column;
     align-items: center;
   }
-  .progress-boxs2 {
-    margin-top: 135px;
-  }
   .progress-box2 {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 1.3vh;
+    margin-bottom: 2vh;
     align-items: center;
   }
   .progress-box2 .el-progress {
@@ -688,10 +694,10 @@ th {
   .progress-message {
     color: #fff;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 1vw;
   }
   .progress {
-    padding-top: 20px;
+    // padding-top: 10px;
   }
   .el-table::before {
     height: 0;
@@ -707,12 +713,12 @@ th {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 80px;
+    height: 30px;
   }
   .timebox div {
     color: #fff;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 1vw;
   }
   .el-progress__text {
     color: rgb(213, 104, 13);
@@ -737,14 +743,35 @@ th {
     background-color: #f14135;
   }
   .progress-table th > .cell {
-    height: 55px;
+    // height: 55px;
+  }
+  .progress-table td {
+    padding: 1px;
   }
   .progress-table td > .cell {
-    height: 45px;
-    line-height: 45px;
+    // height: 45px;
+    // line-height: 45px;
   }
   .el-table .cell {
-    line-height: 50px;
+    // line-height: 50px;
   }
+}
+.content-box .el-progress__text {
+  font-size: 16px !important;
+}
+.el-table th,
+.el-table tr {
+  background-color: #000552;
+}
+
+.el-table td > .cell {
+  font-size: 16px !important;
+}
+
+.content-box .el-progress__text {
+  font-size: 16px !important;
+}
+.content-box .el-progress-bar__outer {
+  background-color: #4caf50 !important;
 }
 </style>

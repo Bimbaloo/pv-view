@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      title: '三课一车间生产看板',
+      title: '一工厂标间车间看板',
       time: ''
     }
   },
@@ -60,19 +60,15 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .title-box {
-  height: 10%;
+  height: 10vh;
   background-image: linear-gradient(to right, #020828, #12204d, #020828);
-  width: 100%;
+  width: 100vw;
 
   .title {
-    font-size: 80px;
-    width: 100%;
+    font-size: 2.7vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    line-height: 120px;
-    height: 120px;
-    font-size: 50px;
     color: #fff;
   }
 
@@ -80,7 +76,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-right: 100px;
 
     .time,
     .name {
@@ -88,12 +83,13 @@ export default {
     }
 
     .name {
-      font-size: 80px;
-      margin-left: 50px;
+      font-size: 2vw;
+      margin-left: 1vw;
+      margin-right: 1vw;
     }
 
     .time {
-      font-size: 50px;
+      font-size: 1vw;
     }
   }
 }
