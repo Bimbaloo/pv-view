@@ -409,8 +409,10 @@ export default {
             fontWeight: 'bold',
             fontSize: 15,
             color: '#fff',
-            align: 'center'
-          }
+            align: 'center',
+            show: false
+          },
+          interval: 1 / 12
         },
         yAxis: {
           type: 'category',
@@ -420,7 +422,8 @@ export default {
             fontSize: 10,
             color: '#fff'
             // lineHeight: '10'
-          }
+          },
+          inverse: true
         },
         series: [
           {
