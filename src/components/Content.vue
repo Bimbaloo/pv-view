@@ -71,7 +71,7 @@
     </div>
     <!-- 异常 -->
     <div class="abnormal">
-      <div class="designation">
+      <div class="designation" style="padding-top:1vh">
         <i class="el-icon-menu"></i>
         <span>过程监控</span>
       </div>
@@ -153,7 +153,7 @@
         <i class="el-icon-menu"></i>
         <span>生产进度</span>
       </div>
-      <div class="left" style="height: 45vh;width: 70vw;">
+      <div class="left" style="height: 45vh;width: 65vw;">
         <div class="timebox">
           <div v-for="(timeData, index) in timeDatas" :key="index">
             {{ timeData }}
@@ -161,7 +161,7 @@
         </div>
         <div id="container" style="height:265px"></div>
       </div>
-      <div class="right" style="height: 45vh;width: 30vw;">
+      <div class="right" style="height: 45vh;width: 35vw;">
         <el-table
           class="progress-table"
           ref="table5"
@@ -184,9 +184,9 @@
   </div>
 </template>
 <script>
-// const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
+const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
 // const url = 'http://192.168.120.62/mes/cjkb/execute' // 张杭烃本地
-const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
+// const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
 
 // 查询条件
 const data = {
@@ -323,6 +323,11 @@ export default {
         ],
         data4: [], // 异常情况表格
         columns5: [
+          {
+            label: '计划投入数',
+            prop: 'jhtrs',
+            align: 'center'
+          },
           {
             label: '计划达成率',
             prop: 'jhdcl',
@@ -518,11 +523,16 @@ export default {
     // 更新数据
     updateData (options) {
       // 产前准备
-      this.qjd = (options.cqzb[0].qjd * 10000) / 100
-      this.wlqtl = (options.cqzb[0].wlqtl * 10000) / 100
-      this.sbdjs = (options.cqzb[0].sbdjs * 10000) / 100
+      this.qjd = parseInt(options.cqzb[0].qjd * 10000) / 100
+      this.wlqtl = parseInt(options.cqzb[0].wlqtl * 10000) / 100
+      this.sbdjs = parseInt(options.cqzb[0].sbdjs * 10000) / 100
 
       // 定额人员
+      options.derycq.forEach(el => {
+        el.cql = parseInt(el.cql * 10000) / 100 + '%'
+        el.ccq = parseInt(el.ccq * 10000) / 100 + '%'
+      })
+
       this.tableData.data = options.derycq
 
       // 非定额人员
@@ -532,13 +542,13 @@ export default {
       // 异常情况
       this.tableData.data4 = options.ycqk.data
 
-      this.ctl = (options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
-      this.ydl = (options.ycqk.yc.ydl * 10000) / 100 // 移动率
-      this.jhdcl = (options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
-      this.ztl = (options.ycqk.yc.ztl * 10000) / 100 // 良率
+      this.ctl = parseInt(options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
+      this.ydl = parseInt(options.ycqk.yc.ydl * 10000) / 100 // 移动率
+      this.jhdcl = parseInt(options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
+      this.ztl = parseInt(options.ycqk.yc.ztl * 10000) / 100 // 良率
 
-      this.zjshl = (options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
-      this.OQC = (options.ycqk.yc.OQC * 10000) / 100 // OQC
+      this.zjshl = parseInt(options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
+      this.OQC = parseInt(options.ycqk.yc.OQC * 10000) / 100 // OQC
 
       // 生产进度
       const data = []
@@ -546,9 +556,10 @@ export default {
       const huang = []
       const hong = []
       options.scjd.forEach(el => {
-        el.jhdcl = (el.jhdcl * 100).toFixed(2)
-        el.wlqtl = (el.wlqtl * 100).toFixed(2)
-        el.ztl = (el.ztl * 100).toFixed(2)
+        el.jhdcl = parseInt(el.jhdcl * 10000) / 100 + '%'
+        el.wlqtl = parseInt(el.wlqtl * 10000) / 100 + '%'
+        el.ztl = parseInt(el.ztl * 10000) / 100 + '%'
+        // el.jhtrs = parseInt(el.jhtrs * 10000) / 100 + '%'
 
         data.push(el.xt)
         lv.push(el.lv)
@@ -682,7 +693,7 @@ th {
   .progress-box2 {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 1.3vh;
+    margin-top: 1.4vh;
     margin-bottom: 2vh;
     align-items: center;
   }
@@ -749,8 +760,8 @@ th {
     padding: 1px;
   }
   .progress-table td > .cell {
-    height: 32px;
-    line-height: 32px;
+    height: 32.5px;
+    line-height: 32.5px;
   }
   .el-table .cell {
     // line-height: 50px;
