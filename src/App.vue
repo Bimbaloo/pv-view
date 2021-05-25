@@ -28,9 +28,11 @@ export default {
   },
   created () {
     document.addEventListener('fullscreenchange', e => {
+      debugger
       if (document.fullscreenElement) {
         this.isFullScreen = false
       } else {
+        console.log(0)
         this.isFullScreen = true
       }
     })

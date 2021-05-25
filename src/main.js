@@ -13,6 +13,7 @@ import './assets/css/reset.css'
 Vue.prototype.axios = axios
 Vue.prototype.echarts = echarts
 
+// Vue.use(ElementUI, vConsole)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

@@ -75,20 +75,8 @@
         <i class="el-icon-menu"></i>
         <span>过程监控</span>
       </div>
-      <div class="table-message">
-        <el-table ref="table4" :data="tableData.data4" style="width: 100%">
-          <el-table-column
-            v-for="col in columns4"
-            :key="col.prop"
-            :label="col.label"
-            :prop="col.prop"
-            :class-name="col.class"
-            align="center"
-          >
-          </el-table-column>
-        </el-table>
-      </div>
-      <div class="progress-boxs" style="margin-top:0">
+
+      <div class="progress-boxs" style="margin-top:1.1vh;height:17vh">
         <div class="progress-box">
           <el-progress
             type="dashboard"
@@ -126,7 +114,7 @@
         </div>
       </div>
       <div class="progress-boxs2">
-        <div class="progress-box2">
+        <div class="progress-box2" v-show="false">
           <div class="progress-message">
             治具损坏率
           </div>
@@ -146,6 +134,19 @@
             color="#f14135"
           ></el-progress>
         </div>
+      </div>
+      <div class="table-message" style="margin-top: 20px">
+        <el-table ref="table4" :data="tableData.data4" style="width: 100%">
+          <el-table-column
+            v-for="col in columns4"
+            :key="col.prop"
+            :label="col.label"
+            :prop="col.prop"
+            :class-name="col.class"
+            align="center"
+          >
+          </el-table-column>
+        </el-table>
       </div>
     </div>
     <div class="progress">
@@ -167,7 +168,6 @@
           ref="table5"
           :data="tableData.data5"
           style="width: 100%"
-          height="265"
         >
           <el-table-column
             v-for="col in columns5"
@@ -201,7 +201,7 @@ const data = {
 // 最长查询时间
 const timeout = { timeout: 50000 }
 // 轮询的时间
-const time = 30 * 60 * 1000
+const time = 10 * 60 * 1000
 
 export default {
   name: 'PcViewContent',
@@ -626,7 +626,7 @@ th {
   color: #fff;
   font-weight: bold;
   font-size: 1vw;
-  line-height: 2vh;
+  line-height: 2.2vh;
 }
 .el-table td > .cell {
   // height: 1vh;
@@ -769,8 +769,8 @@ th {
     padding: 1px;
   }
   .progress-table td > .cell {
-    height: 32.5px;
-    line-height: 32.5px;
+    height: 37px;
+    line-height: 37px;
   }
   .el-table .cell {
     // line-height: 50px;
