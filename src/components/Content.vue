@@ -201,7 +201,7 @@ const data = {
 // 最长查询时间
 const timeout = { timeout: 50000 }
 // 轮询的时间
-const time = 10 * 60 * 1000
+const time = 5 * 60 * 1000
 
 export default {
   name: 'PcViewContent',
