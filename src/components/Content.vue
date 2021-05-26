@@ -443,7 +443,7 @@ export default {
         },
         series: [
           {
-            name: '入库',
+            name: '完工',
             type: 'bar',
             stack: 'total',
             itemStyle: { color: 'rgb(76, 175, 80)' },
