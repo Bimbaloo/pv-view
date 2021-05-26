@@ -177,6 +177,15 @@
             :class-name="col.class"
             align="center"
           >
+            <template slot-scope="props">
+              <div
+                :class="{
+                  grey: props.row[col.prop] == '0' && col.prop == 'jhtrs'
+                }"
+              >
+                {{ props.row[col.prop] }}
+              </div>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -238,12 +247,12 @@ export default {
       percentage2: 90,
       tableData: {
         columns: [
-          {
-            label: '在职人员',
-            prop: 'zzrs',
-            align: 'center',
-            showHead: true
-          },
+          // {
+          //   label: '在职人员',
+          //   prop: 'zzrs',
+          //   align: 'center',
+          //   showHead: true
+          // },
           {
             label: '应出勤',
             prop: 'ycq',
@@ -256,12 +265,12 @@ export default {
             align: 'center',
             showHead: true
           },
-          {
-            label: '超出勤',
-            prop: 'ccq',
-            align: 'center',
-            showHead: true
-          },
+          // {
+          //   label: '超出勤',
+          //   prop: 'ccq',
+          //   align: 'center',
+          //   showHead: true
+          // },
           {
             label: '出勤率',
             prop: 'cql',
@@ -786,5 +795,8 @@ th {
 }
 .content-box .el-progress-bar__outer {
   background-color: #4caf50 !important;
+}
+.grey {
+  color: #9e9e9e;
 }
 </style>
