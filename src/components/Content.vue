@@ -28,7 +28,7 @@
               :width="width"
             >
             </el-progress>
-            <span>清洁度OK率</span>
+            <span>洁净度OK率</span>
           </div>
           <div class="progress-box">
             <el-progress
@@ -39,7 +39,7 @@
               :width="width"
             >
             </el-progress>
-            <span>物料齐率</span>
+            <span>物料齐套率</span>
           </div>
         </div>
       </div>
@@ -330,12 +330,12 @@ export default {
           },
 
           {
-            label: '计划达成率',
+            label: '计划完工率',
             prop: 'jhdcl',
             align: 'center'
           },
           {
-            label: '物料齐通率',
+            label: '物料齐套率',
             prop: 'wlqtl',
             align: 'center'
           },
@@ -527,14 +527,14 @@ export default {
     // 更新数据
     updateData (options) {
       // 产前准备
-      this.qjd = (options.cqzb[0].qjd * 10000) / 100
-      this.wlqtl = (options.cqzb[0].wlqtl * 10000) / 100
-      this.sbdjs = (options.cqzb[0].sbdjs * 10000) / 100
+      this.qjd = parseInt(options.cqzb[0].qjd * 10000) / 100
+      this.wlqtl = parseInt(options.cqzb[0].wlqtl * 10000) / 100
+      this.sbdjs = parseInt(options.cqzb[0].sbdjs * 10000) / 100
 
       // 定额人员
       options.derycq.forEach(el => {
-        el.ccq = (el.ccq * 10000) / 100 + '%'
-        el.cql = (el.cql * 10000) / 100 + '%'
+        el.ccq = parseInt(el.ccq * 10000) / 100 + '%'
+        el.cql = parseInt(el.cql * 10000) / 100 + '%'
       })
       this.tableData.data = options.derycq
 
@@ -545,13 +545,13 @@ export default {
       // 异常情况
       this.tableData.data4 = options.ycqk.data
 
-      this.ctl = (options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
-      this.ydl = (options.ycqk.yc.ydl * 10000) / 100 // 移动率
-      this.jhdcl = (options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
-      this.ztl = (options.ycqk.yc.ztl * 10000) / 100 // 良率
+      this.ctl = parseInt(options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
+      this.ydl = parseInt(options.ycqk.yc.ydl * 10000) / 100 // 移动率
+      this.jhdcl = parseInt(options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
+      this.ztl = parseInt(options.ycqk.yc.ztl * 10000) / 100 // 良率
 
-      this.zjshl = (options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
-      this.OQC = (options.ycqk.yc.OQC * 10000) / 100 // OQC
+      this.zjshl = parseInt(options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
+      this.OQC = parseInt(options.ycqk.yc.OQC * 10000) / 100 // OQC
 
       // 生产进度
       const data = []
@@ -559,9 +559,9 @@ export default {
       const huang = []
       const hong = []
       options.scjd.forEach(el => {
-        el.jhdcl = (el.jhdcl * 10000) / 100 + '%'
-        el.wlqtl = (el.wlqtl * 10000) / 100 + '%'
-        el.ztl = (el.ztl * 10000) / 100 + '%'
+        el.jhdcl = parseInt(el.jhdcl * 10000) / 100 + '%'
+        el.wlqtl = parseInt(el.wlqtl * 10000) / 100 + '%'
+        el.ztl = parseInt(el.ztl * 10000) / 100 + '%'
 
         data.push(el.xt)
         lv.push(el.lv)

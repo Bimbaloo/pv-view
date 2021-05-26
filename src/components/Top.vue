@@ -3,7 +3,7 @@
     <div class="title">{{ title }}</div>
     <div class="message">
       <div class="time">{{ time }}</div>
-      <div class="name">MES</div>
+      <div class="name" @click="changeFullScreen()">MES</div>
     </div>
   </div>
 </template>
@@ -16,11 +16,22 @@ export default {
   },
   data () {
     return {
-      title: '一工厂标间车间看板',
-      time: ''
+      title: '一工厂标杆车间看板',
+      time: '',
+      isFullScreen: false
     }
   },
   created () {
+    document.addEventListener('fullscreenchange', e => {
+      if (document.fullscreenElement) {
+        this.isFullScreen = true
+        console.log('全屏')
+      } else {
+        this.isFullScreen = false
+        console.log('退出全屏')
+      }
+    })
+
     this.currentTime()
   },
   methods: {
@@ -52,6 +63,27 @@ export default {
     // 实时更新时间
     currentTime () {
       setInterval(this.formatDate, 500)
+    },
+    // 改变全屏
+    changeFullScreen () {
+      const Element = document.body
+      if (!this.isFullScreen) {
+        if (Element.requestFullScreen) {
+          Element.requestFullScreen()
+        } else if (Element.webkitRequestFullScreen) {
+          Element.webkitRequestFullScreen()
+        } else if (Element.mozRequestFullScreen) {
+          Element.mozRequestFullScreen()
+        }
+      } else {
+        if (Element.requestFullScreen) {
+          document.exitFullScreen()
+        } else if (Element.webkitRequestFullScreen) {
+          document.webkitCancelFullScreen()
+        } else if (Element.mozRequestFullScreen) {
+          document.mozCancelFullScreen()
+        }
+      }
     }
   }
 }

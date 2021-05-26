@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <i
-      class="el-icon-data-line fullScreen"
-      v-on:click="fullScreen"
-      v-show="isFullScreen"
-    ></i>
     <Top />
     <Content />
   </div>
@@ -21,30 +16,10 @@ export default {
     Top
   },
   data () {
-    return {
-      isFullScreen: true
-    }
+    return {}
   },
-  created () {
-    document.addEventListener('fullscreenchange', e => {
-      if (document.fullscreenElement) {
-        this.isFullScreen = false
-      } else {
-        this.isFullScreen = true
-      }
-    })
-  },
-  methods: {
-    fullScreen () {
-      const Fullscreen = document
-        .querySelector('#app')
-        .requestFullscreen()
-        .then(() => {
-          this.isFullScreen = false
-        })
-      console.log(Fullscreen)
-    }
-  }
+  created () {},
+  methods: {}
 }
 </script>
 
