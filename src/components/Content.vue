@@ -628,7 +628,7 @@ th {
   color: #fff;
   font-weight: bold;
   font-size: 1vw;
-  line-height: 2vh;
+  line-height: 2.5vh;
 }
 .el-table td > .cell {
   // height: 1vh;
