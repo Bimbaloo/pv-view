@@ -25,10 +25,8 @@ export default {
     document.addEventListener('fullscreenchange', e => {
       if (document.fullscreenElement) {
         this.isFullScreen = true
-        console.log('全屏')
       } else {
         this.isFullScreen = false
-        console.log('退出全屏')
       }
     })
 
@@ -66,21 +64,23 @@ export default {
     },
     // 改变全屏
     changeFullScreen () {
-      const Element = document.body
+      const element = document.body
       if (!this.isFullScreen) {
-        if (Element.requestFullScreen) {
-          Element.requestFullScreen()
-        } else if (Element.webkitRequestFullScreen) {
-          Element.webkitRequestFullScreen()
-        } else if (Element.mozRequestFullScreen) {
-          Element.mozRequestFullScreen()
+        if (element.requestFullscreen) {
+          element.requestFullscreen()
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen()
+        } else if (element.msRequestFullscreen) {
+          element.msRequestFullscreen()
+        } else if (element.webkitRequestFullscreen) {
+          element.webkitRequestFullScreen()
         }
       } else {
-        if (Element.requestFullScreen) {
+        if (element.requestFullScreen) {
           document.exitFullScreen()
-        } else if (Element.webkitRequestFullScreen) {
+        } else if (element.webkitRequestFullScreen) {
           document.webkitCancelFullScreen()
-        } else if (Element.mozRequestFullScreen) {
+        } else if (element.mozRequestFullScreen) {
           document.mozCancelFullScreen()
         }
       }
