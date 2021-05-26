@@ -28,7 +28,7 @@
               :width="width"
             >
             </el-progress>
-            <span>清洁度OK率</span>
+            <span>洁净度OK率</span>
           </div>
           <div class="progress-box">
             <el-progress
@@ -39,7 +39,7 @@
               :width="width"
             >
             </el-progress>
-            <span>物料齐率</span>
+            <span>物料齐套率</span>
           </div>
         </div>
       </div>
@@ -331,13 +331,13 @@ export default {
             width: 85
           },
           {
-            label: '计划达成率',
+            label: '计划完工率',
             prop: 'jhdcl',
             align: 'center',
             width: 85
           },
           {
-            label: '物料齐通率',
+            label: '物料齐套率',
             prop: 'wlqtl',
             align: 'center',
             width: 85
@@ -553,7 +553,7 @@ export default {
 
       this.ctl = parseInt(options.ycqk.yc.ctl * 10000) / 100 // 设备直通率
       this.ydl = parseInt(options.ycqk.yc.ydl * 10000) / 100 // 移动率
-      this.jhdcl = parseInt(options.ycqk.yc.jhdcl * 10000) / 100 // 计划达成率
+      this.jhdcl = parseInt(options.ycqk.yc.jhdcl * 10000) / 100 // 计划完工率
       this.ztl = parseInt(options.ycqk.yc.ztl * 10000) / 100 // 良率
 
       this.zjshl = parseInt(options.ycqk.yc.zjshl * 10000) / 100 // 治具损坏率
