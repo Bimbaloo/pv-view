@@ -401,7 +401,7 @@ export default {
           }
         },
         legend: {
-          data: ['入库', '物料齐套', '总计划'],
+          data: ['完工', '物料齐套', '总计划'],
           left: 'center',
           bottom: '1%',
           itemWidth: 20,
