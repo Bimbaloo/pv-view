@@ -352,12 +352,12 @@ export default {
             align: 'center',
             width: 85
           },
-          {
-            label: '实际UPH',
-            prop: 'uph',
-            align: 'center',
-            width: 80
-          },
+          // {
+          //   label: '实际UPH',
+          //   prop: 'uph',
+          //   align: 'center',
+          //   width: 80
+          // },
           {
             label: '直通率',
             prop: 'ztl',
