@@ -180,7 +180,7 @@
             <template slot-scope="props">
               <div
                 :class="{
-                  grey: props.row[col.prop] == '0' && col.prop == 'jhtrs'
+                  grey: props.row['jhtrs'] == '0'
                 }"
               >
                 {{ props.row[col.prop] }}
