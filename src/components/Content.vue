@@ -51,11 +51,7 @@
           >
         </div>
         <div class="table-message">
-          <el-table
-            ref="table"
-            :data="tableData.data"
-            style="width: 100%;margin-top: 5px;"
-          >
+          <el-table ref="table" :data="tableData.data" style="width: 100%;">
             <el-table-column
               v-for="col in columns"
               :key="col.prop"
@@ -71,62 +67,52 @@
     </div>
     <!-- 异常 -->
     <div class="abnormal">
-      <div class="designation" style="padding-top:1vh">
-        <i class="el-icon-menu"></i>
-        <span>过程监控</span>
-      </div>
-      <div class="table-message">
-        <el-table ref="table4" :data="tableData.data4" style="width: 100%">
-          <el-table-column
-            v-for="col in columns4"
-            :key="col.prop"
-            :label="col.label"
-            :prop="col.prop"
-            :class-name="col.class"
-            align="center"
-          >
-          </el-table-column>
-        </el-table>
-      </div>
-      <div class="progress-boxs" style="margin-top:0">
-        <div class="progress-box">
-          <el-progress
-            type="dashboard"
-            :percentage="jhdcl"
-            :stroke-width="strokeWidth"
-            :color="colors"
-            :width="width"
-          >
-          </el-progress>
-          <span>计划完工率</span>
+      <div class="ready">
+        <div class="designation">
+          <i class="el-icon-menu"></i>
+          <span>过程监控</span>
         </div>
+        <div class="progress-boxs">
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :percentage="jhdcl"
+              :stroke-width="strokeWidth"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>计划完工率</span>
+          </div>
 
-        <div class="progress-box">
-          <el-progress
-            type="dashboard"
-            :percentage="ztl"
-            :stroke-width="strokeWidth"
-            :color="colors"
-            :width="width"
-          >
-          </el-progress>
-          <span>直通率</span>
-        </div>
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :percentage="ztl"
+              :stroke-width="strokeWidth"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>直通率</span>
+          </div>
 
-        <div class="progress-box">
-          <el-progress
-            type="dashboard"
-            :stroke-width="strokeWidth"
-            :percentage="ydl"
-            :color="colors"
-            :width="width"
-          >
-          </el-progress>
-          <span>稼动率</span>
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :stroke-width="strokeWidth"
+              :percentage="ydl"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>稼动率</span>
+          </div>
         </div>
       </div>
-      <div class="progress-boxs2">
-        <div class="progress-box2">
+      <div class="chuqing">
+        <div class="progress-boxs2">
+          <!-- <div class="progress-box2">
           <div class="progress-message">
             治具损坏率
           </div>
@@ -135,16 +121,31 @@
             :percentage="zjshl"
             color="#f14135"
           ></el-progress>
-        </div>
-        <div class="progress-box2">
-          <div class="progress-message">
-            OQC批退率
+        </div> -->
+          <div class="progress-box2">
+            <div class="progress-message">
+              OQC批退率
+            </div>
+            <el-progress
+              :stroke-width="10"
+              :percentage="OQC"
+              color="#f14135"
+            ></el-progress>
           </div>
-          <el-progress
-            :stroke-width="10"
-            :percentage="OQC"
-            color="#f14135"
-          ></el-progress>
+        </div>
+
+        <div class="table-message">
+          <el-table ref="table4" :data="tableData.data4" style="width: 100%">
+            <el-table-column
+              v-for="col in columns4"
+              :key="col.prop"
+              :label="col.label"
+              :prop="col.prop"
+              :class-name="col.class"
+              align="center"
+            >
+            </el-table-column>
+          </el-table>
         </div>
       </div>
     </div>
@@ -167,7 +168,6 @@
           ref="table5"
           :data="tableData.data5"
           style="width: 100%"
-          height="270"
         >
           <el-table-column
             v-for="col in columns5"
@@ -628,7 +628,7 @@ th {
   color: #fff;
   font-weight: bold;
   font-size: 1vw;
-  line-height: 2.5vh;
+  line-height: 3vh;
 }
 .el-table td > .cell {
   // height: 1vh;
@@ -647,6 +647,8 @@ th {
   .designation {
     color: #fff;
     font-size: 1.5vw;
+    height: 3vh;
+    line-height: 3vh;
   }
 
   .progress-boxs {
@@ -682,8 +684,19 @@ th {
     width: 50vw;
     border-left: 5px solid #12204d;
     border-bottom: 10px solid #12204d;
-
     box-sizing: border-box;
+    .ready,
+    .chuqing {
+      padding-top: 1vh;
+      height: 23vh;
+    }
+    .chuqing {
+      height: 15vh;
+      .progress-boxs2 {
+        height: 3vh;
+        line-height: 3vh;
+      }
+    }
   }
 
   .progress {
@@ -704,8 +717,6 @@ th {
   .progress-box2 {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 1.5vh;
-    margin-bottom: 2vh;
     align-items: center;
   }
   .progress-box2 .el-progress {
@@ -766,6 +777,9 @@ th {
   }
   .progress-table th > .cell {
     height: 16px;
+    color: #fff;
+    font-size: 1vw;
+    line-height: 2.2vh;
   }
   .progress-table td {
     padding: 1px;

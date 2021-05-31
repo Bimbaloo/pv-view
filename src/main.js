@@ -7,14 +7,14 @@ import * as echarts from 'echarts'
 
 import './assets/css/reset.css'
 
-import VConsole from 'vconsole'
-const vConsole = new VConsole()
+// import VConsole from 'vconsole'
+// const vConsole = new VConsole()
 
 Vue.prototype.axios = axios
 Vue.prototype.echarts = echarts
 
-Vue.use(ElementUI, vConsole)
-// Vue.use(ElementUI)
+// Vue.use(ElementUI, vConsole)
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
