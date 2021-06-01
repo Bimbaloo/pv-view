@@ -348,11 +348,11 @@ export default {
             prop: 'wlqtl',
             align: 'center'
           },
-          {
-            label: '实际UPH',
-            prop: 'uph',
-            align: 'center'
-          },
+          // {
+          //   label: '实际UPH',
+          //   prop: 'uph',
+          //   align: 'center'
+          // },
           {
             label: '直通率',
             prop: 'ztl',
