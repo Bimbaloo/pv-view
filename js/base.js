@@ -1,18 +1,50 @@
-var Main = new Vue({
+const url = 'http://192.168.46.10:9201/mes/cjkb/execute' // 服务器
+// const url = 'http://192.168.120.62/mes/cjkb/execute' // 张杭烃本地
+// const url = 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999' // rap2模拟数据
+
+// 查询条件
+const data = {
+  gc: '1530',
+  lh: '新基地4#',
+  ks: '组测三课',
+  cj: '三课一',
+  sbglcj: '组测三课一车间'
+}
+
+// 最长查询时间
+const timeout = { timeout: 50000 }
+// 轮询的时间
+const time = 30 * 60 * 1000
+
+let Main = new Vue({
   el: '#app',
-  name: "app",
+  name: 'app',
   data: {
-    width: 265,
-    strokeWidth: 32,
+    width: 350,
+    strokeWidth: 40,
     time: '',
     timeDatas: [
-      "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "00:00", "02:00", "04:00", "06:00", "08:00"
+      '08:00',
+      '10:00',
+      '12:00',
+      '14:00',
+      '16:00',
+      '18:00',
+      '20:00',
+      '22:00',
+      '00:00',
+      '02:00',
+      '04:00',
+      '06:00',
+      '08:00'
     ],
     qjd: 92, //清洁度
     wlqtl: 68, //物料齐套率
     sbdjs: 20, //设备点击率，
     ctl: 10, // 设备直通率
-    ydl: 10, // 移动率
+    ydl: 10, // 稼动率
+    ztl: 0, //直通率
+    jhdcl: 0, //计划达成率
     OQC: 20, // OQC
     zjshl: 20, // 治具损坏率
     percentage: 90,
@@ -57,62 +89,78 @@ var Main = new Vue({
         {
           label: '序列',
           prop: 'xl',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '在职人数',
           prop: 'zzrs',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '实际出勤',
           prop: 'sjcq',
-          align: 'center',
-        }],
+          align: 'center'
+        }
+      ],
       data2: [], // 非定额人员出勤-左
       data3: [], // 非定额人员出勤-右
       columns4: [
         {
           label: '治具总数',
           prop: 'zjzs',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '机台总数',
           prop: 'jtzs',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '运行',
           prop: 'yx',
           align: 'center',
           class: 'lv'
-        }, {
+        },
+        {
           label: '待机',
           prop: 'dj',
           align: 'center',
           class: 'huang'
-        }, {
+        },
+        {
           label: '报警',
           prop: 'bj',
           align: 'center',
           class: 'hong'
-        }, {
+        },
+        {
           label: '离线',
           prop: 'lx',
           align: 'center',
           class: 'hui'
-        }],
+        }
+      ],
       data4: [], // 异常情况表格
       columns5: [
         {
           label: '计划达成率',
           prop: 'jhdcl',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '物料齐通率',
           prop: 'wlqtl',
-          align: 'center',
-        }, {
+          align: 'center'
+        },
+        {
           label: '实际UPH',
           prop: 'uph',
-          align: 'center',
+          align: 'center'
+        },
+        {
+          label: '直通率',
+          prop: 'ztl',
+          align: 'center'
         }
       ],
       data5: [],
@@ -145,8 +193,9 @@ var Main = new Vue({
     echartsOption: {
       tooltip: {
         trigger: 'axis',
-        axisPointer: {            // Use axis to trigger tooltip
-          type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+        axisPointer: {
+          // Use axis to trigger tooltip
+          type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
         }
       },
       legend: {
@@ -156,10 +205,10 @@ var Main = new Vue({
         itemWidth: 100,
         itemHeight: 40,
         textStyle: {
-          color: "#fff",
+          color: '#fff',
           fontSize: 30,
-          fontWeight: "bold"
-        },
+          fontWeight: 'bold'
+        }
       },
       grid: {
         left: '3%',
@@ -171,19 +220,19 @@ var Main = new Vue({
       xAxis: {
         type: 'value',
         axisLabel: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
           fontSize: 30,
-          color: "#fff",
-          align: "center"
+          color: '#fff',
+          align: 'center'
         }
       },
       yAxis: {
         type: 'category',
         data: ['1#', '2#', '3#', '4#', '5#', '6#', '7#'],
         axisLabel: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
           fontSize: 30,
-          color: "#fff",
+          color: '#fff',
           lineHeight: '50'
         }
       },
@@ -224,82 +273,66 @@ var Main = new Vue({
           },
           data: [100, 30, 70, 30, 70, 60, 34]
         }
-
-
       ]
     },
     myChart: null
   },
   computed: {
-    columns() {
-      return this.tableData.columns.filter((item) => {
+    columns () {
+      return this.tableData.columns.filter(item => {
         return item.showHead
       })
     },
-    columns2() {
+    columns2 () {
       return this.tableData.columns2
     },
-    columns4() {
+    columns4 () {
       return this.tableData.columns4
     },
-    columns5() {
+    columns5 () {
       return this.tableData.columns5
     },
-    items() {
-      return this.tableData.columns.filter((item) => {
+    items () {
+      return this.tableData.columns.filter(item => {
         return !item.showHead
       })
     }
   },
-  created: function () {
-
-
-  },
+  created: function () {},
   mounted: function () {
     this.currentTime()
     this.getData()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.formatDate) {
-      clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
+      clearInterval(this.formatDate) // 在Vue实例销毁前，清除时间定时器
     }
   },
   methods: {
     // 获取数据
-    getData() {
-      const options = {
-        // method: 'GET',
-        method: 'POST',
-        // url: '../assets/mock.json',                         // 本地mock数据，需要使用get
-        url: 'http://192.168.46.10:9201/mes/cjkb/execute',  // 服务器
-        // url: 'http://192.168.120.62/mes/cjkb/execute',         // 张杭烃本地
-        // url: 'http://rap2api.taobao.org/app/mock/283615/mes/cjkb/execute:9999',   // rap2模拟数据
-        headers: { 'user-agent': 'vscode-restclient', 'content-type': 'application/json' },
-        data: { gc: '1530', lh: '新基地4#', ks: '组测三课', cj: '三课一', sbglcj: '组测三课一车间' }
-      };
-
+    getData () {
       this.$nextTick(() => {
-        axios.post(options.url, options.data, { timeout: 10000 })
-          .then((response) => {
-            console.log(response);
+        axios
+          .post(url, data, timeout)
+          .then(response => {
+            console.log(response)
             this.updateData(response.data)
             // 每半小时更新数据
             setTimeout(() => {
               this.getData()
-            }, 30 * 60 * 1000)
+            }, time)
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(error => {
+            console.log(error)
             // 因为网络等问题获取数据失败，每半小时重新获取
             setTimeout(() => {
               this.getData()
-            }, 30 * 60 * 1000)
-          });
-
+            }, time)
+          })
       })
     },
     // 更新数据
-    updateData(options) {
+    updateData (options) {
       // 产前准备
       this.qjd = Number((options.cqzb[0].qjd * 100).toFixed(2))
       this.wlqtl = Number((options.cqzb[0].wlqtl * 100).toFixed(2))
@@ -315,11 +348,12 @@ var Main = new Vue({
       // 异常情况
       this.tableData.data4 = options.ycqk.data
 
-      this.ctl = Number(options.ycqk.yc.ctl.toFixed(2))     // 设备直通率
-      this.ydl = Number(options.ycqk.yc.ydl.toFixed(2))    // 移动率
-      this.zjshl = Number(options.ycqk.yc.zjshl.toFixed(2))  // 治具损坏率
-      this.OQC = Number(options.ycqk.yc.OQC.toFixed(2))     // OQC
+      this.jhdcl = Number((options.ycqk.yc.jhdcl * 100).toFixed(2)) // 直通率
+      this.ztl = Number((options.ycqk.yc.ztl * 100).toFixed(2)) // 直通率
+      this.ydl = Number((options.ycqk.yc.ydl * 100).toFixed(2)) // 稼动率
 
+      this.zjshl = Number((options.ycqk.yc.zjshl * 100).toFixed(2)) // 治具损坏率
+      this.OQC = Number((options.ycqk.yc.OQC * 100).toFixed(2)) // OQC
 
       // 生产进度
       let data = []
@@ -329,11 +363,13 @@ var Main = new Vue({
       options.scjd.forEach(el => {
         el.jhdcl = (el.jhdcl * 100).toFixed(2)
         el.wlqtl = (el.wlqtl * 100).toFixed(2)
+        el.ztl = (el.ztl * 100).toFixed(2)
+
         data.push(el.xt)
         lv.push(el.lv)
         huang.push(el.huang)
         hong.push(el.hong)
-      });
+      })
       this.tableData.data5 = options.scjd
 
       this.echartsOption.yAxis.data = data
@@ -341,44 +377,46 @@ var Main = new Vue({
       this.echartsOption.series[1].data = huang
       this.echartsOption.series[2].data = hong
 
-      let dom = document.getElementById("container");
+      let dom = document.getElementById('container')
       if (!this.myChart) {
-        let myChart = echarts.init(dom);
+        let myChart = echarts.init(dom)
         this.myChart = myChart
       }
       // let myChart = echarts.init(dom);
 
       let option = this.echartsOption
       if (option && typeof option === 'object') {
-        this.myChart.setOption(option);
+        this.myChart.setOption(option)
       }
     },
 
     // 计算时间
-    formatDate() {
-      let date = new Date();
-      let year = date.getFullYear(); // 年
-      let month = date.getMonth() + 1; // 月
-      let day = date.getDate(); // 日
-      let week = date.getDay(); // 星期
-      let weekArr = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-      let hour = date.getHours(); // 时
-      hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
-      let minute = date.getMinutes(); // 分
-      minute = minute < 10 ? "0" + minute : minute; // 如果只有一位，则前面补零
-      let second = date.getSeconds(); // 秒
-      second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
+    formatDate () {
+      let date = new Date()
+      let year = date.getFullYear() // 年
+      let month = date.getMonth() + 1 // 月
+      let day = date.getDate() // 日
+      let week = date.getDay() // 星期
+      let weekArr = [
+        '星期日',
+        '星期一',
+        '星期二',
+        '星期三',
+        '星期四',
+        '星期五',
+        '星期六'
+      ]
+      let hour = date.getHours() // 时
+      hour = hour < 10 ? '0' + hour : hour // 如果只有一位，则前面补零
+      let minute = date.getMinutes() // 分
+      minute = minute < 10 ? '0' + minute : minute // 如果只有一位，则前面补零
+      let second = date.getSeconds() // 秒
+      second = second < 10 ? '0' + second : second // 如果只有一位，则前面补零
       this.time = `${year}年${month}月${day}日${hour}:${minute}:${second} ${weekArr[week]}`
-
     },
     // 实时更新时间
-    currentTime() {
-      setInterval(this.formatDate, 500);
+    currentTime () {
+      setInterval(this.formatDate, 500)
     }
   }
 })
-
-
-
-
-

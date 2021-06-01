@@ -1,165 +1,215 @@
 <!DOCTYPE html>
 <html lang="zh" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Access-Control-Allow-Origin" content="*">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="public/js/echarts.common.js"></script>
+    <script src="public/js/vue.js"></script>
+    <script src="public/element-ui/index.js"></script>
+    <link rel="stylesheet" href="public/element-ui/theme-chalk/index.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="public/js/axios.js"></script>
+    <title>车间看板</title>
+  </head>
 
-  <script src="public/js/echarts.common.js"></script>
-  <script src="public/js/vue.js"></script>
-  <script src="public/element-ui/index.js"></script>
-  <link rel="stylesheet" href="public/element-ui/theme-chalk/index.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/base.css">
-  <script src="public/js/axios.js"></script>
-  <title>车间看板</title>
-</head>
-
-<body>
-  <div id="app">
-    <!-- 抬头 -->
-    <div class="title-box">
-      <div class="title">三课一车间生产看板</div>
-      <div class="message" style="display: flex;">
-        <div class="time">{{time}}</div>
-        <div class="name">MES</div>
+  <body>
+    <div id="app">
+      <!-- 抬头 -->
+      <div class="title-box">
+        <div class="title">三课一车间生产看板</div>
+        <div class="message" style="display: flex;">
+          <div class="time">{{time}}</div>
+          <div class="name">MES</div>
+        </div>
       </div>
-    </div>
-    <!-- 生产 -->
-    <div class="Production">
-      <div class="ready">
+      <!-- 生产 -->
+      <div class="Production">
+        <div class="ready">
+          <div class="designation">
+            <i class="el-icon-menu"></i>
+            <span>产前准备</span>
+          </div>
+          <div class="progress-boxs" style="height: 580px;">
+            <div class="progress-box">
+              <el-progress
+                type="dashboard"
+                :percentage="qjd"
+                :stroke-width="strokeWidth"
+                :color="colors"
+                :width="width"
+              >
+              </el-progress>
+              <span>设备点击率</span>
+            </div>
+
+            <div class="progress-box">
+              <el-progress
+                type="dashboard"
+                :percentage="wlqtl"
+                :stroke-width="strokeWidth"
+                :color="colors"
+                :width="width"
+              >
+              </el-progress>
+              <span>清洁度OK率</span>
+            </div>
+            <div class="progress-box">
+              <el-progress
+                type="dashboard"
+                :percentage="sbdjs"
+                :stroke-width="strokeWidth"
+                :color="colors"
+                :width="width"
+              >
+              </el-progress>
+              <span>物料齐率</span>
+            </div>
+          </div>
+        </div>
+        <!-- 出勤 -->
+        <div class="chuqing">
+          <div class="designation">
+            <i class="el-icon-menu"></i>
+            <span>定额人员出勤</span>
+          </div>
+          <div class="table-message">
+            <el-table
+              ref="table"
+              :data="tableData.data"
+              style="width: 100%;margin-top: 20px;"
+            >
+              <el-table-column
+                v-for="col in columns"
+                :key="col.prop"
+                :label="col.label"
+                :prop="col.prop"
+                :class-name="col.class"
+                align="center"
+              >
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+      </div>
+      <!-- 异常 -->
+      <div class="abnormal">
         <div class="designation">
           <i class="el-icon-menu"></i>
-          <span>产前准备</span>
+          <span>过程情况</span>
         </div>
-        <div class="progress-boxs">
-          <div class="progress-box">
-            <el-progress type="dashboard" :percentage="qjd" :stroke-width="strokeWidth" :color="colors" :width='width'>
-            </el-progress>
-            <span>设备点击率</span>
-          </div>
-
-          <div class="progress-box">
-            <el-progress type="dashboard" :percentage="wlqtl" :stroke-width="strokeWidth" :color="colors"
-              :width='width'>
-            </el-progress>
-            <span>清洁度OK率</span>
-          </div>
-          <div class="progress-box">
-            <el-progress type="dashboard" :percentage="sbdjs" :stroke-width="strokeWidth" :color="colors"
-              :width='width'>
-            </el-progress>
-            <span>物料齐率</span>
-          </div>
-        </div>
-
-
-      </div>
-      <!-- 出勤 -->
-      <div class="chuqing">
-        <div class="designation">
-          <i class="el-icon-menu"></i>
-          <span>定额人员出勤</span>
-        </div>
-        <div class="table-message">
-          <el-table ref="table" :data="tableData.data" style="width: 100%;margin-top: 20px;">
-            <el-table-column v-for="col in columns" :key="col.prop" :label="col.label" :prop="col.prop"
-              :class-name="col.class" align='center'>
+        <div class="table-message" style="margin-top: 50px;">
+          <el-table ref="table4" :data="tableData.data4" style="width: 100%">
+            <el-table-column
+              v-for="col in columns4"
+              :key="col.prop"
+              :label="col.label"
+              :prop="col.prop"
+              :class-name="col.class"
+              align="center"
+            >
             </el-table-column>
           </el-table>
         </div>
+        <div class="progress-boxs" style="margin-top: 35px;">
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :percentage="jhdcl"
+              :stroke-width="strokeWidth"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>计划达成率</span>
+          </div>
 
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :percentage="ztl"
+              :stroke-width="strokeWidth"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>直通率</span>
+          </div>
+
+          <div class="progress-box">
+            <el-progress
+              type="dashboard"
+              :stroke-width="strokeWidth"
+              :percentage="ydl"
+              :color="colors"
+              :width="width"
+            >
+            </el-progress>
+            <span>稼动率</span>
+          </div>
+        </div>
+        <div class="progress-boxs2">
+          <div class="progress-box2">
+            <div class="progress-message">
+              治具损坏率
+            </div>
+            <el-progress
+              :stroke-width="50"
+              :percentage="zjshl"
+              color="#4caf50"
+            ></el-progress>
+          </div>
+          <div class="progress-box2">
+            <div class="progress-message">
+              OQC批退率
+            </div>
+            <el-progress
+              :stroke-width="50"
+              :percentage="OQC"
+              color="#4caf50"
+            ></el-progress>
+          </div>
+        </div>
       </div>
-      <!-- 非定额出勤 -->
-      <div class="feichuqing">
-        <div class="designation">
+      <!-- 进度 -->
+      <div class="progress">
+        <div class="designation" style="width: 100%;">
           <i class="el-icon-menu"></i>
-          <span>非定额人员出勤</span>
+          <span>过程明细</span>
         </div>
-        <div class="table-message" style="display: flex;">
-          <el-table ref="table2" :data="tableData.data2" style="width: 45%;margin-top: 20px;">
-            <el-table-column v-for="col in columns2" :key="col.prop" :label="col.label" :prop="col.prop"
-              :class-name="col.class" align='center'>
+        <div class="left" style="height: 80%;width: 70%;">
+          <div class="timebox">
+            <div v-for="timeData in timeDatas">{{timeData}}</div>
+          </div>
+          <div id="container" style="height: 740px;"></div>
+        </div>
+        <div class="right" style="height: 80%;width: 30%;">
+          <el-table
+            class="progress-table"
+            ref="table5"
+            :data="tableData.data5"
+            style="width: 100%"
+            height="750"
+          >
+            <el-table-column
+              v-for="col in columns5"
+              :key="col.prop"
+              :label="col.label"
+              :prop="col.prop"
+              :class-name="col.class"
+              align="center"
+            >
             </el-table-column>
           </el-table>
-          <el-table ref="table2" :data="tableData.data2" style="width: 45%;margin-top: 20px;">
-            <el-table-column v-for="col in columns2" :key="col.prop" :label="col.label" :prop="col.prop"
-              :class-name="col.class" align='center'>
-            </el-table-column>
-          </el-table>
         </div>
       </div>
     </div>
-    <!-- 异常 -->
-    <div class="abnormal">
-      <div class="designation">
-        <i class="el-icon-menu"></i>
-        <span>异常情况</span>
-      </div>
-      <div class="table-message" style="margin-top: 50px;">
-        <el-table ref="table4" :data="tableData.data4" style="width: 100%">
-          <el-table-column v-for="col in columns4" :key="col.prop" :label="col.label" :prop="col.prop"
-            :class-name="col.class" align='center'>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div class="progress-boxs" style="margin-top: 50px;">
-        <div class="progress-box">
-          <el-progress type="dashboard" :percentage="ctl" :stroke-width="strokeWidth" :color="colors" :width='width'>
-          </el-progress>
-          <span>设备直通率</span>
-        </div>
-
-        <div class="progress-box">
-          <el-progress type="dashboard" :stroke-width="strokeWidth" :percentage="ydl" :color="colors" :width='width'>
-          </el-progress>
-          <span>稼动率</span>
-        </div>
-      </div>
-      <div class="progress-boxs2">
-        <div class="progress-box2">
-          <div class="progress-message">
-            治具损坏率
-          </div>
-          <el-progress :stroke-width="50" :percentage="zjshl" color='#4caf50'></el-progress>
-        </div>
-        <div class="progress-box2">
-          <div class="progress-message">
-            OQC批退率
-          </div>
-          <el-progress :stroke-width="50" :percentage="OQC" color='#4caf50'></el-progress>
-        </div>
-      </div>
-
-    </div>
-    <!-- 进度 -->
-    <div class="progress">
-      <div class="designation" style="width: 100%;">
-        <i class="el-icon-menu"></i>
-        <span>生产进度</span>
-      </div>
-      <div class="left" style="height: 80%;width: 70%;">
-        <div class="timebox">
-          <div v-for='timeData in timeDatas'>{{timeData}}</div>
-        </div>
-        <div id="container" style="height: 740px;"></div>
-      </div>
-      <div class="right" style="height: 80%;width: 30%;">
-        <el-table class="progress-table" ref="table5" :data="tableData.data5" style="width: 100%" height='750'>
-          <el-table-column v-for="col in columns5" :key="col.prop" :label="col.label" :prop="col.prop"
-            :class-name="col.class" align='center'>
-          </el-table-column>
-        </el-table>
-      </div>
-
-
-    </div>
-
-  </div>
-  <script src="js/base.js"></script>
-</body>
-
+    <script src="js/base.js"></script>
+  </body>
 </html>

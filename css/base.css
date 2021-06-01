@@ -1,3 +1,7 @@
+html,body{
+  width: 3840px;
+  height: 2160px;
+}
 #app {
   background-color: hsl(236deg 100% 16%);
   display: flex;
@@ -69,7 +73,7 @@
 
 .ready {
   padding-top: 10px;
-  height: 40%
+  height: 65%
 }
 
 .designation {
@@ -84,7 +88,7 @@
 
 .chuqing {
   padding-top: 10px;
-  height: 25%;
+  height: 35%;
 }
 .feichuqing {
   padding-top: 10px;
@@ -128,13 +132,10 @@
 }
 
 
-.abnormal {
-
-}
 .progress-boxs {
   display: flex;
   justify-content: space-around;
-  margin-top: 25px;
+  align-items: center;
 }
 .progress-box span{
   color: #fff;
@@ -144,12 +145,12 @@
 
 .progress-box {
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-.progress-boxs2 {
+/* .progress-boxs2 {
  margin-top: 135px;
-}
+} */
 
 .progress-box2 {
   display: flex;
@@ -234,8 +235,8 @@ td.hui>.cell {
   height: 55px;
 }
 .progress-table td>.cell{
-  height: 63px;
-  line-height: 63px;
+  height: 52px;
+  line-height: 52px;
 }
 
 .el-table .cell {
